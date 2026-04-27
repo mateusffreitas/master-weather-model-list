@@ -1,9 +1,9 @@
 # GDPS (Global Deterministic Prediction System)
 
 ## What this model is
-The Global Deterministic Prediction System (GDPS) is Canada’s primary global numerical weather prediction system, providing deterministic forecasts of atmospheric conditions worldwide.
+The Global Deterministic Prediction System (GDPS) is Canada's primary global numerical weather prediction system, providing deterministic forecasts of atmospheric conditions worldwide.
 
-GDPS is based on the Global Environmental Multiscale (GEM) atmospheric model and operates as part of a coupled Earth-system framework, supplying large-scale guidance and boundary conditions for Canada’s regional and high-resolution forecast systems.
+GDPS is based on the Global Environmental Multiscale (GEM) atmospheric model and operates as part of a coupled Earth-system framework, supplying large-scale guidance and boundary conditions for Canada's regional and high-resolution forecast systems.
 
 ---
 
@@ -41,7 +41,7 @@ Deterministic global forecasts of:
 - Large-scale circulation patterns
 - Boundary and initial conditions for downstream systems
 
-GDPS provides the large-scale deterministic guidance that underpins Canada’s regional (RDPS) and high-resolution (HRDPS) deterministic prediction systems.
+GDPS provides the large-scale deterministic guidance that underpins Canada's regional (RDPS) and high-resolution (HRDPS) deterministic prediction systems.
 
 ---
 
@@ -50,6 +50,8 @@ GDPS provides the large-scale deterministic guidance that underpins Canada’s r
 - **Is the data downloadable?** Yes
 - **Data formats:** GRIB2
 - **Official download location:**  
+  https://dd.weather.gc.ca/today/model_gem_global/15km/grib2/lat_lon/
+- **Documentation:**  
   https://eccc-msc.github.io/open-data/msc-data/nwp_gdps/readme_gdps-datamart_en/
 
 ---
@@ -61,25 +63,13 @@ GDPS provides the large-scale deterministic guidance that underpins Canada’s r
 
 ---
 
-## Experimental AI-hybrid configuration (GDPS-SN)
+## Related: experimental successor
 
-ECCC has developed an experimental hybrid configuration of GDPS that integrates AI-based weather prediction into the physics-based forecast. In this system:
+ECCC distributes an experimental successor to the operational GDPS at https://dd.weather.gc.ca/today/model_gdps/ which, per ECCC's own statement at that endpoint, is expected to replace the operational GDPS in 2026. The experimental system (GDPS Experimental Version 9.0.9, implemented March 5, 2025) features hybrid AI-physics forecasting via spectral nudging toward the [GEML](./gdps-geml.md) data-driven weather model, along with substantial updates to data assimilation, sea ice physics, and other components.
 
-- The GEM physics model continues to run the full forecast integration.
-- Large-scale temperature and horizontal wind components are spectrally nudged toward predictions from GEML (Global Environmental eMuLator), ECCC's data-driven AI weather model derived from GraphCast and fine-tuned on GDPS analyses.
-- Nudging is applied only to mid-tropospheric large scales (approximately 400–250 hPa), leaving boundary-layer and mesoscale dynamics to GEM.
+See [`gdps-exp.md`](./gdps-exp.md) for full documentation of the experimental system.
 
-The hybrid system is referred to as GDPS-SN (spectral nudging). Published research (Husain et al., 2024/2025) reports meaningful skill improvements over the pure physics GDPS at medium-range lead times.
-
-As of early 2026, GDPS-SN is distributed as **experimental data** through MSC GeoMet web services and the MSC Datamart at approximately 15 km (0.15°) horizontal resolution on ~30 vertical levels, run twice daily to 10-day lead time.
-
-Experimental data access:
-- MSC Datamart (experimental GDPS): https://dd.weather.gc.ca/today/model_gdps/
-- MSC Open Data documentation: https://eccc-msc.github.io/open-data/msc-data/nwp_gdps/readme_gdps_en/
-
-ECCC's April 2026 supercomputer upgrade to H100 GPU infrastructure is the enabling hardware for operational AI-hybrid NWP — running neural network inference inside the operational forecast cycle requires GPU acceleration that was not previously available at CMC.
-
-GDPS-SN is not yet an operational replacement for the standard GDPS described above, but represents the clearest indication of the direction Canadian global NWP is heading.
+---
 
 ## Official documentation
-- https://eccc-msc.github.io/open-data/msc-data/nwp_gdps/readme_gdps_en/
+- https://eccc-msc.github.io/open-data/msc-data/nwp_gdps/readme_gdps-datamart_en/
