@@ -28,6 +28,11 @@ NOAA's next-generation convection-allowing system for North America. Pre-operati
 - **Entries:** [RRFS](./models/nwp_models/regional/usa/rrfs.md) · [REFS](./models/ensemble_models/regional/usa/refs.md)
 - **Authority:** NWS PNS 25-41
 
+### GDPS-EXP — expected to replace operational GDPS in 2026
+ECCC distributes GDPS Experimental Version 9.0.9 (implemented March 5, 2025) at https://dd.weather.gc.ca/today/model_gdps/, and per ECCC's own statement at that endpoint, the experimental system is "expected to replace in 2026, the current Global Deterministic Prediction System (GDPS) data." This is a directional signal rather than a fixed implementation date — no formal Service Change Notice has been issued. Beyond the headline hybrid AI-physics integration via spectral nudging toward GEML, v9.0.9 includes substantial updates to data assimilation (4DEnVar with 256-member LETKF backgrounds from GEPS 8.0.0, RTTOV v13, all-sky ATMS humidity assimilation), sea ice physics (CICE 6.2.0), and a new Mean Dynamic Topography for SLA assimilation. ECCC's April 2026 H100 GPU supercomputer upgrade is the enabling infrastructure.
+- **Entries:** [GDPS-EXP](./models/nwp_models/global/canada/gdps-exp.md) · [GEML](./models/nwp_models/global/canada/gdps-geml.md) · [Operational GDPS](./models/nwp_models/global/canada/gem-global.md)
+- **Authority:** ECCC MSC datamart README at https://dd.weather.gc.ca/today/model_gdps/README.txt
+
 ### GFSv17 and GDASv17 — proposed for October 2026
 NOAA/NWS published PNS 26-29 (April 15, 2026) proposing an upgrade of the operational GFS and GDAS from v16 to v17 in October 2026. A companion notice, PNS 26-30 (April 16, 2026), covers the legacy products slated for removal as part of the cutover.
 
@@ -42,6 +47,15 @@ NOAA published PNS 26-17 on March 12, 2026, proposing replacement of HYCOM with 
 - **Entry:** [RTOFS Global](./models/ocean_models/global/us/rtofs-global.md)
 - **Authority:** NWS PNS 26-17
 - **Full UFS context:** See [UFS.md](./UFS.md) — RTOFS v3.0 aligns RTOFS with the UFS ocean and ice model stack used elsewhere.
+
+---
+
+## Recently operational (AI weather systems)
+
+### AIGFS, AIGEFS, HGEFS — operational December 17, 2025
+NOAA's three AI-based global weather systems became operational on the same date, replacing EAGLE SOLO (deterministic) and EAGLE Ensemble. AIGFS and AIGEFS are standalone AI systems based on the GraphCast architecture; HGEFS is a "grand ensemble" combining 31 GEFS physics members with 31 AIGEFS AI members. None of the three replaces an operational physics-based system — they run alongside GFS and GEFS.
+- **Entries:** [AIGFS](./models/nwp_models/global/usa/aigfs.md) · [AIGEFS](./models/ensemble_models/global/usa/aigefs.md) · [HGEFS](./models/ensemble_models/global/usa/hgefs.md)
+- **Authority:** NOAA press release on AI-driven global weather models, December 2025
 
 ---
 
@@ -70,8 +84,11 @@ These systems are publicly signaled but have **no formal retirement notification
 
 ## Experimental and pre-operational systems
 
-### [GDPS-SN (ECCC)](./models/nwp_models/global/canada/gem-global.md#experimental-ai-hybrid-configuration-gdps-sn)
-Experimental hybrid physics–AI configuration of GDPS. GEM model spectrally nudged toward ECCC's GEML AI model at large scales. Distributed as experimental data via MSC GeoMet and MSC Datamart. The April 2026 CMC H100 GPU supercomputer upgrade is the enabling infrastructure for eventual operationalization.
+### [GDPS-EXP (ECCC)](./models/nwp_models/global/canada/gdps-exp.md)
+Experimental hybrid physics–AI successor candidate to operational GDPS. GEM v5.2 atmospheric model spectrally nudged toward GEML at large scales (>2750 km) in the mid-troposphere (250–850 hPa). 15 km, 84 levels, 10-day forecast 2× daily. Beyond the AI integration, v9.0.9 also brings substantial DA, sea ice, and physics updates relative to operational GDPS 9.0.0. Distributed via the standard MSC datamart at https://dd.weather.gc.ca/today/model_gdps/. Per ECCC's own statement at that endpoint, expected to replace operational GDPS in 2026 — see "Imminent or recent changes" above. Current version 9.0.9 implemented March 5, 2025.
+
+### [GEML (ECCC)](./models/nwp_models/global/canada/gdps-geml.md)
+Experimental standalone AI global deterministic weather model. Graph neural network derived from Google DeepMind's GraphCast architecture, retrained by ECCC on ERA5 reanalysis (1979–2016) and ECMWF HRES analyses (2016–2021). 0.25° (~28 km) resolution, 13 pressure levels, 10-day forecast 2× daily, initialized from GDPS analysis. Serves a dual role as both a standalone forecast product (distributed at https://dd.weather.gc.ca/today/model_gdps-geml/25km/) and the spectral nudging target for GDPS-EXP. Trained model weights are publicly released via HuggingFace at https://huggingface.co/ECCC-ASTD-MRD/geml — unusual openness compared to most operational AI weather systems.
 
 ### [CAPS (ECCC)](./models/nwp_models/regional/canada/caps.md)
 Experimental coupled atmosphere-ocean-sea ice prediction system at ~3 km resolution covering a large pan-Arctic domain (northern Canada, Alaska, Greenland, Iceland, Scandinavia, Baltic countries, eastern Russia). GEM atmospheric component (configuration inherited from the decommissioned HRDPS-North) two-way coupled to NEMO v3.6 ocean and CICE v6.2.0 sea ice via the GOSSIP coupler at 5-minute exchange frequency. Provides forecast guidance to Canadian Storm Prediction Centres, DND, CCG, and DFO. Distributed via the standard MSC datamart but explicitly designated as experimental. Current version 3.0.0 implemented June 18, 2025.
@@ -79,11 +96,11 @@ Experimental coupled atmosphere-ocean-sea ice prediction system at ~3 km resolut
 ### [HRDPS-West (ECCC)](./models/nwp_models/regional/canada/hrdps-west.md)
 Experimental kilometric-scale (~1 km) deterministic NWP system covering Southern British Columbia. GEM v5.2.0 atmospheric model piloted by HRDPS national v7.0.0, with surface initial conditions from CaLDAS. Distributed via the MSC alpha datamart (separate from the standard operational MSC datamart). Intended to better resolve mesoscale features in BC's complex topography than the operational 2.5 km HRDPS. Current version 1.5.0 released November 6, 2024.
 
-### [AIGFS (NOAA)](./models/nwp_models/global/usa/aigfs.md)
-Experimental AI global deterministic model. Not a replacement for GFS.
+### [GraphCastGFS (NOAA)](./models/nwp_models/global/usa/graphcastgfs.md)
+Experimental productionization of Google DeepMind's GraphCast architecture by NOAA, fine-tuned on GDAS+ERA5 data. Predecessor of the operational AIGFS, but continues to run experimentally alongside its operational descendant.
 
-### [AIGEFS (NOAA)](./models/ensemble_models/global/usa/aigefs.md)
-Experimental AI global ensemble model. Not a replacement for GEFS.
+### [FourCastNetGFS (NOAA)](./models/nwp_models/global/usa/fourcastnetgfs.md)
+Experimental productionization of NVIDIA's FourCastNet architecture using Spherical Fourier Neural Operators. No operational descendant announced as of April 2026.
 
 ---
 
@@ -103,6 +120,8 @@ Extended forecast length from 198 h to 246 h; added parameters and levels; renam
 ## How to read this page
 
 **Imminent or recent changes** are events that have happened in the last few months or will happen in the next few months. These need the most active attention from catalog users.
+
+**Recently operational (AI weather systems)** highlights AI-based forecast systems that have transitioned from experimental to operational status. Listed separately because the AI lifecycle is moving fast and is worth tracking distinctly.
 
 **Scheduled retirements** are events with authoritative NWS/ECMWF/ECCC notifications confirming the change. These are locked in pending operational implementation.
 
