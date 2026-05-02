@@ -42,6 +42,13 @@ BAM output is used for medium-range forecasting and as background guidance withi
 
 ---
 
+## Data assimilation
+BAM is initialized from analyses produced by **SMNA** (Sistema de Modelagem Numérica e Assimilação de dados — Numerical Modeling and Data Assimilation System), CPTEC's operational data assimilation system. SMNA pairs BAM with the **GSI (Gridpoint Statistical Interpolation)** variational data assimilation system, with development work on a hybrid 3DEnVar configuration documented in CPTEC research literature.
+
+SMNA is the Brazilian counterpart to systems like NOAA's GDAS (which initializes GFS) — it is not a separate forecast model, but rather the analysis system whose output provides BAM's initial conditions.
+
+---
+
 ## Data availability
 - **Is the data free?** Yes
 - **Is the data downloadable?** Yes
