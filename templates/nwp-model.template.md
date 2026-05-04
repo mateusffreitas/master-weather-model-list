@@ -20,7 +20,10 @@
 ## Basic details
 - **Model type:** Deterministic NWP
 - **Model system / core:** <e.g., ICON, IFS, GEM, WRF, HARMONIE-AROME, COSMO>
+- **Dynamical formulation:** <Hydrostatic / Non-hydrostatic> (TBD)
+- **Convection-allowing:** <Yes / No> (typically Yes when horizontal resolution is ≤ ~4 km; TBD)
 - **Horizontal resolution:** <e.g., ~13 km / 0.25° / ~2.5 km> (native vs published grid if different)
+- **Grid dimensions (optional):** <e.g., 1024 × 768 grid points> (may instead be noted under "What area it covers"; TBD)
 - **Vertical levels:** <e.g., 120> (TBD if unknown)
 - **Model top (optional):** <e.g., ~75 km> (TBD)
 - **Forecast length:** <e.g., up to 240 h / 10 days> (mention per-cycle differences if applicable)
