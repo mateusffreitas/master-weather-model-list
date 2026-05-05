@@ -25,6 +25,8 @@ It is JMA's primary medium-range global model, used for tropical cyclone informa
 ## Basic details
 - **Model type:** Global deterministic NWP
 - **Model system / core:** GSM (spectral, hydrostatic)
+- **Dynamical formulation:** Hydrostatic, spectral, with two-time-level semi-Lagrangian / semi-implicit time integration
+- **Convection-allowing:** No (deep convection is parameterized at ~13 km resolution)
 - **Native horizontal resolution:** ~13 km (TQ959) — upgraded from ~20 km in 2023
 - **Public output grids:**  
   - 0.25° latitude–longitude (1440 × 721 global; 661 × 381 RA-II)  
