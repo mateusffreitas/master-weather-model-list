@@ -5,7 +5,7 @@ The UKMO Global model is the global deterministic numerical weather prediction s
 
 It is a global configuration of the **Unified Model (UM)** — the Met Office's flagship NWP and climate modelling suite, named because the same model code is used across timescales from nowcasting to climate projections, and across spatial scales from kilometre-scale convective forecasting to centennial Earth system runs.
 
-UKMO Global provides medium-range deterministic forecasts of atmospheric conditions worldwide and is the parent model that supplies lateral boundary conditions for the Met Office's regional UK Variable-resolution model ([UKV](./ukv.md)), as well as for several Unified Model deployments operated by partner agencies (notably the Australian Bureau of Meteorology and the Korea Meteorological Administration).
+UKMO Global provides medium-range deterministic forecasts of atmospheric conditions worldwide and is the parent model that supplies lateral boundary conditions for the Met Office's regional UK Variable-resolution model ([UKV](../../regional/uk/ukv.md)), as well as for several Unified Model deployments operated by partner agencies (notably the Australian Bureau of Meteorology and the Korea Meteorological Administration).
 
 The current operational version is part of **Operational Suite 47 (OS47)**, implemented on 21 January 2026 — the Met Office's first major science upgrade in over three years and the first run on its new Microsoft Azure-based supercomputer.
 
