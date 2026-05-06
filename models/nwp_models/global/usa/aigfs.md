@@ -5,7 +5,7 @@ The Artificial Intelligence Global Forecast System (AIGFS) is NOAA's operational
 
 It is a fine-tuned productionization of Google DeepMind's GraphCast architecture (Lam et al., 2023), retrained by NOAA's Environmental Modeling Center (EMC) using NOAA's own Global Data Assimilation System (GDAS) analyses paired with ECMWF ERA5 reanalysis as training targets. Unlike traditional physics-based NWP, AIGFS does not solve the equations of fluid dynamics explicitly; instead, it predicts atmospheric evolution directly from learned patterns in historical weather data, producing 16-day forecasts in roughly 40 minutes on GPU hardware.
 
-AIGFS is the operational descendant of NOAA's experimental EAGLE SOLO program (which itself was based on the experimental [GraphCastGFS](./graphcastgfs.md) system) and runs alongside the physics-based [GFS](./gfs.md) as a complement, not a replacement. It became operational at 12 UTC on December 17, 2025, alongside its ensemble counterparts [AIGEFS](../../ensemble_models/global/usa/aigefs.md) and [HGEFS](../../ensemble_models/global/usa/hgefs.md), as the first AI-based global weather forecast systems implemented by NOAA in operations.
+AIGFS is the operational descendant of NOAA's experimental EAGLE SOLO program (which itself was based on the experimental [GraphCastGFS](./graphcastgfs.md) system) and runs alongside the physics-based [GFS](./gfs.md) as a complement, not a replacement. It became operational at 12 UTC on December 17, 2025, alongside its ensemble counterparts [AIGEFS](../../../ensemble_models/global/usa/aigefs.md) and [HGEFS](../../../ensemble_models/global/usa/hgefs.md), as the first AI-based global weather forecast systems implemented by NOAA in operations.
 
 The current operational version is AIGFS v1.0.
 
@@ -101,8 +101,8 @@ AIGFS is intended primarily for **synoptic-scale and large-scale forecasting**, 
 ### Lineage within NOAA's AI program
 - **[GraphCastGFS](./graphcastgfs.md)** (NCEP, experimental) — earlier productionization that AIGFS evolved from. GraphCastGFS v2.0 introduced GDAS-based fine-tuning; AIGFS v1.0 inherits this approach with refinements.
 - **EAGLE SOLO** (decommissioned operationally) — the experimental demonstration system that AIGFS replaced. EAGLE SOLO v1.0 ran from April 24, 2024 to December 18, 2025. The EAGLE SOLO AWS bucket continues to host **experimental AIGFSdev forecasts** for ongoing AIGFS development (see Notes below).
-- **[AIGEFS](../../ensemble_models/global/usa/aigefs.md)** (operational) — the 31-member AI-based ensemble counterpart to AIGFS, implemented on the same date.
-- **[HGEFS](../../ensemble_models/global/usa/hgefs.md)** (operational) — the hybrid "grand ensemble" combining 31 GEFS physics members with 31 AIGEFS AI members, also implemented on the same date.
+- **[AIGEFS](../../../ensemble_models/global/usa/aigefs.md)** (operational) — the 31-member AI-based ensemble counterpart to AIGFS, implemented on the same date.
+- **[HGEFS](../../../ensemble_models/global/usa/hgefs.md)** (operational) — the hybrid "grand ensemble" combining 31 GEFS physics members with 31 AIGEFS AI members, also implemented on the same date.
 
 ### Architectural peers (GraphCast family)
 AIGFS is part of a broader family of operational productionizations of the GraphCast architecture. All share the same ~37M-parameter GNN architecture and the 13-pressure-level vertical structure, but differ in training data, fine-tuning procedures, and operational role:
