@@ -5,7 +5,7 @@ ARPEGE Europe is the **regional 0.1° public distribution** of Météo-France's 
 
 It is not a separate model — the underlying forecasts come from the same global ARPEGE run on its stretched-grid spectral core, where native resolution is finest over France (~5 km). The Europe distribution simply interpolates that output onto a regional 0.1° regular latitude–longitude grid, providing a finer-resolution view of the same forecast over the European domain than the 0.25° or 0.5° global packages can offer.
 
-For the parent system's full technical description, see [ARPEGE](../global/france//arpege-global.md).
+For the parent system's full technical description, see [ARPEGE](../../global/france//arpege-global.md).
 
 ---
 
