@@ -111,7 +111,7 @@ HRDPS-West provides forecasting guidance to:
 - HRDPS-West is distributed as **experimental data** via the MSC alpha datamart.
 - It is not operationally supported in the same sense as HRDPS, GDPS, RDPS, or other operational ECCC prediction systems.
 - Users requiring operational guidance over Southern BC should continue to use the operational [HRDPS](./hrdps.md) at 2.5 km resolution.
-- HRDPS-West is one of several experimental ECCC systems alongside [GDPS-SN](../../global/canada/gem-global.md#experimental-ai-hybrid-configuration-gdps-sn) — see the repository's [`STATUS.md`](../../../STATUS.md) for the current list.
+- HRDPS-West is one of several experimental ECCC systems alongside [GDPS-EXP](../../global/canada/gdps-exp.md) — see the repository's [`STATUS.md`](../../../../STATUS.md) for the current list.
 
 ---
 
@@ -136,7 +136,7 @@ Headline changes from earlier versions:
 ## Official documentation
 - HRDPS-West alpha datamart README: https://eccc-msc.github.io/open-data/msc-data/nwp_hrdps/readme_hrdps-datamart-alpha_en/
 - HRDPS-West changelog: https://eccc-msc.github.io/open-data/msc-data/nwp_hrdps/changelog_hrdps-west_en/
-- Technical specifications (HRDPS-West 1.5.0): https://collaboration.cmc.ec.gc.ca/cmc/CMOI/product_guide/docs/tech_specifications/tech_specifications_HRDPS-WEST_1_5_0_e.pdf
+- Technical specifications (HRDPS-West 1.5.0): https://collaboration.cmc.ec.gc.ca/cmc/cmoi/product_guide/docs/tech_specifications/tech_specifications_HRDPS-WEST_1.5.0_e.pdf
 - ECCC operational systems changelog: https://eccc-msc.github.io/open-data/msc-data/changelog_multisystems_en/
 - Licence: https://eccc-msc.github.io/open-data/licence/readme_en/
 
