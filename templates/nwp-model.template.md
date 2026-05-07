@@ -1,7 +1,7 @@
 # <MODEL NAME>
 
 ## What this model is
-<One or two plain-language sentences describing what the model is and what it’s used for.>
+<One or two plain-language sentences describing what the model is and what it's used for.>
 
 ---
 
@@ -53,6 +53,7 @@ Deterministic forecasts of:
 
 ## Data availability
 - **Is the data free?** Yes / No / Partial
+- **License:** <e.g., CC BY 4.0 / CC BY-SA 4.0 / Etalab Open Licence / Public domain (U.S. government work; CC0-equivalent) / KNMI Open Data licence / Copernicus Marine Service licence> (note attribution or share-alike obligations if applicable; TBD)
 - **Is the data downloadable?** Yes / No
 - **Data formats:** <GRIB2 / NetCDF / both> (include compression notes if relevant)
 - **Official download location:**  
@@ -61,7 +62,14 @@ Deterministic forecasts of:
 ---
 
 ## Notes
-- <Anything important: subsets, grid quirks, trapezoidal domains, changes in ops, relationship to ensemble versions, etc.>
+- <Anything important: subsets, grid quirks, trapezoidal domains, changes in ops, public-vs-full-ops differences, etc.>
+- <Relationship to siblings: ensemble counterpart, regional nest, parent global model.>
+- <For AI-based or hybrid systems, note the AI approach here and update [`AI_MODELS.md`](../AI_MODELS.md).>
+
+---
+
+## Recent version history (optional)
+<Include this section if the model has documented operational upgrades worth tracking. See `nbm.md`, `rrfs.md`, `raqdps.md`, `ukmo-global.md` for examples. Otherwise omit.>
 
 ---
 
