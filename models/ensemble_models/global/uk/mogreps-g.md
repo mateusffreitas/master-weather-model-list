@@ -3,7 +3,7 @@
 ## What this model is
 MOGREPS-G is the global ensemble numerical weather prediction system operated by the UK Met Office.
 
-It is the global ensemble counterpart to the deterministic [UKMO Global](../../nwp_models/global/uk/ukmo-global.md), built on the same Unified Model code base in its Global Coupled 5 (GC5) science configuration. MOGREPS-G provides probabilistic medium-range forecasts to 10 days, supplies lateral boundary conditions for the regional [MOGREPS-UK](../../regional/uk/mogreps-uk.md) ensemble, and contributes flow-dependent background-error covariances back to UKMO Global's hybrid 4D-Var data assimilation system.
+It is the global ensemble counterpart to the deterministic [UKMO Global](../../../nwp_models/global/uk/ukmo-global.md), built on the same Unified Model code base in its Global Coupled 5 (GC5) science configuration. MOGREPS-G provides probabilistic medium-range forecasts to 10 days, supplies lateral boundary conditions for the regional [MOGREPS-UK](../../regional/uk/mogreps-uk.md) ensemble, and contributes flow-dependent background-error covariances back to UKMO Global's hybrid 4D-Var data assimilation system.
 
 The ensemble distribution is structurally distinctive: 17 perturbed members + 1 control are produced **per cycle** for forecast distribution, but the underlying data assimilation runs an **ensemble of 44 perturbed members** under a hybrid four-dimensional ensemble-variational (En-4DEnVar) scheme — the first operational atmospheric ensemble in the world to apply hybrid 4DEnVar to each of its analysis members (since December 2019).
 
@@ -45,7 +45,7 @@ MOGREPS-G is initialized from a **hybrid four-dimensional ensemble-variational (
 
 The MOGREPS-G ensemble analysis serves a dual purpose:
 - It produces the perturbed initial conditions for the MOGREPS-G ensemble forecast itself
-- It provides **flow-dependent background-error covariances** for the deterministic [UKMO Global](../../nwp_models/global/uk/ukmo-global.md) hybrid 4D-Var data assimilation system
+- It provides **flow-dependent background-error covariances** for the deterministic [UKMO Global](../../../nwp_models/global/uk/ukmo-global.md) hybrid 4D-Var data assimilation system
 
 A subsequent OS46-era upgrade (December 2020) added **shifting and lagging** to the ensemble use in deterministic DA — including ensemble members from the previous cycle and from adjacent forecast lead times — to augment the effective ensemble size without running additional forecasts. The deterministic system was further weighted toward ensemble covariances in May 2022.
 
@@ -73,12 +73,12 @@ Probabilistic global forecasts including:
 - Cloud cover, ceilings, visibility, and wind gusts
 - Boundary-layer and aviation-relevant diagnostics
 - Lateral boundary conditions for the [MOGREPS-UK](../../regional/uk/mogreps-uk.md) regional ensemble
-- Flow-dependent background-error covariances for the deterministic [UKMO Global](../../nwp_models/global/uk/ukmo-global.md) data assimilation
+- Flow-dependent background-error covariances for the deterministic [UKMO Global](../../../nwp_models/global/uk/ukmo-global.md) data assimilation
 
 ---
 
 ## Relationship to other models
-- **[UKMO Global](../../nwp_models/global/uk/ukmo-global.md):** Deterministic counterpart, sharing the Unified Model codebase and GC5 science configuration. The two systems are operationally interdependent — MOGREPS-G provides ensemble covariances to UKMO Global's hybrid 4D-Var, and both share the OS47 upgrade cycle.
+- **[UKMO Global](../../../nwp_models/global/uk/ukmo-global.md):** Deterministic counterpart, sharing the Unified Model codebase and GC5 science configuration. The two systems are operationally interdependent — MOGREPS-G provides ensemble covariances to UKMO Global's hybrid 4D-Var, and both share the OS47 upgrade cycle.
 - **[MOGREPS-UK](../../regional/uk/mogreps-uk.md):** Regional convection-permitting ensemble counterpart for the UK; receives lateral boundary conditions from MOGREPS-G.
 
 The Unified Model is also operated by partner agencies for ensemble forecasting: the Australian Bureau of Meteorology runs ACCESS-GE (33 km global ensemble), and the Korea Meteorological Administration runs its own Unified Model ensemble.
