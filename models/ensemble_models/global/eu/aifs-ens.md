@@ -3,7 +3,7 @@
 ## What this model is
 AIFS ENS is ECMWF's operational machine-learning-based global ensemble weather forecast system.
 
-Like the deterministic [AIFS Single](./aifs-single.md), AIFS ENS is a trained neural network rather than a physics-based solver. Unlike AIFS Single, however, AIFS ENS is specifically trained to produce probabilistic forecasts using a CRPS-derived loss function (replaced by a multi-scale loss in v2) and generates ensemble members by injecting random Gaussian noise into the transformer processor during inference.
+Like the deterministic [AIFS Single](../../../nwp_models/global/eu/aifs-single.md), AIFS ENS is a trained neural network rather than a physics-based solver. Unlike AIFS Single, however, AIFS ENS is specifically trained to produce probabilistic forecasts using a CRPS-derived loss function (replaced by a multi-scale loss in v2) and generates ensemble members by injecting random Gaussian noise into the transformer processor during inference.
 
 AIFS ENS runs operationally alongside the physics-based [IFS ENS](./ifs-ens.md) and is designed to complement rather than replace it. It became operational on 1 July 2025, making it ECMWF's second operational machine-learning forecast system after AIFS Single (operational 25 February 2025).
 
@@ -80,7 +80,7 @@ AIFS ENS v2 (operational 12 May 2026) additionally provides:
 ## Relationship to other models
 AIFS ENS is the **ensemble AI companion** to ECMWF's physics-based [IFS ENS](./ifs-ens.md). It runs operationally alongside IFS ENS and is considered complementary rather than a replacement.
 
-It is the probabilistically-trained counterpart to **[AIFS Single](./aifs-single.md)** (the deterministic AI model). Both share the same underlying encoder–processor–decoder architecture but differ in training methodology, loss function, and the addition of stochastic noise injection in AIFS ENS.
+It is the probabilistically-trained counterpart to **[AIFS Single](../../../nwp_models/global/eu/aifs-single.md)** (the deterministic AI model). Both share the same underlying encoder–processor–decoder architecture but differ in training methodology, loss function, and the addition of stochastic noise injection in AIFS ENS.
 
 AIFS ENS depends on **IFS** for initial conditions — it inherits IFS ENS's perturbed initial conditions on a member-by-member basis and relies on ECMWF's physics-based 4D-Var data assimilation system to generate the analyses, then propagates forecasts forward using the neural network.
 
@@ -114,7 +114,7 @@ First operational version of the AIFS ensemble. Replaced earlier research config
 Training: pre-training on ERA5 (1979–2022, 300,000 steps), then fine-tuning on ERA5 + IFS operational analyses (2018–2023). Initial conditions derived from IFS ENS perturbations on a member-by-member basis; ensemble spread generated through injected Gaussian noise during inference.
 
 ### AIFS ENS v2 — scheduled 12 May 2026
-Major upgrade deployed jointly with [IFS Cycle 50r1](./ifs.md#upcoming-changes) and [AIFS Single v2](./aifs-single.md). Architectural and scientific changes:
+Major upgrade deployed jointly with [IFS Cycle 50r1](../../../nwp_models/global/eu/ifs.md#upcoming-changes) and [AIFS Single v2](../../../nwp_models/global/eu/aifs-single.md). Architectural and scientific changes:
 
 - **New 10 hPa pressure level** for geopotential, temperature, horizontal winds, and vertical velocity (consistent with AIFS Single v2).
 - **New wave ensemble stream** (`stream=waef`) — the first probabilistic data-driven wave forecasts ECMWF has issued.
