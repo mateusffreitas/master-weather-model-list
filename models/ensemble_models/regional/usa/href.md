@@ -5,7 +5,7 @@
 ## What this model is
 The High-Resolution Ensemble Forecast (HREF) is NOAA's operational convection-allowing regional ensemble system, providing probabilistic guidance for severe weather, heavy precipitation, winter storms, and aviation hazards across CONUS, Alaska, Hawaii, and Puerto Rico.
 
-Structurally, **HREF is unusual among operational ensembles**: rather than running its own ensemble forecast members, it is a **post-processing ensemble of already-existing model outputs**. HREF members are drawn from current-cycle and time-lagged forecasts of the [HiresW](https://www.emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/hiresw.php) deterministic system (ARW + FV3 cores), the [NAM Nest](./nam-nest.md), and the [HRRR](./hrrr.md). HREF performs no data assimilation of its own and runs no model integration of its own — it is a probabilistic aggregator that combines the diverse forecasts produced by its constituent systems.
+Structurally, **HREF is unusual among operational ensembles**: rather than running its own ensemble forecast members, it is a **post-processing ensemble of already-existing model outputs**. HREF members are drawn from current-cycle and time-lagged forecasts of the HiresW deterministic system (ARW + FV3 cores), the [NAM Nest](../../../nwp_models/regional/usa/nam-nest.md), and the [HRRR](../../../nwp_models/regional/usa/hrrr.md). HREF performs no data assimilation of its own and runs no model integration of its own — it is a probabilistic aggregator that combines the diverse forecasts produced by its constituent systems.
 
 This design is operationally efficient and exploits **member diversity from different dynamical cores** (FV3, NMMB B-grid, WRF-ARW, NMM-B), different physics suites, different DA systems, and different initialization times to produce a probabilistic spread that approximates a "true" ensemble. HREF originated from the **SPC Storm Scale Ensemble of Opportunity (SSEO)**, an experimental system at NSSL/SPC's Hazardous Weather Testbed that demonstrated skill for six years before becoming operational HREF v1 at NCEP in 2017.
 
@@ -119,11 +119,11 @@ HREF products are heavily used by:
 
 HREF is **fundamentally dependent** on its constituent models. Any disruption to those models propagates directly to HREF.
 
-- **[HRRR](./hrrr.md):** Provides 4 of the 10 CONUS HREF members (current + time-lagged), and 4 of the 8 Alaska HREF members. HREFv3 added HRRR to the membership for the first time.
-- **[NAM Nest](./nam-nest.md):** Provides 2 members per domain (current + time-lagged). The 12-hour time-lagged NAM Nest is used for some HREF cycles.
-- **HiresW (ARW, FV3):** Provides the foundational 4 members per domain. The HiresW system is itself slated for retirement under PNS 25-41 except for the Guam domain (see [HiresW Guam](./hiresw-guam.md)).
-- **[REFS](./refs.md):** Future replacement. REFS is a **true ensemble** built on the [RRFS](./rrfs.md) infrastructure — meaning it will use coordinated initial-condition perturbations and stochastic physics rather than the post-processing approach HREF uses. REFS will run to 60 hours (longer than HREF's 48 hours) at 4 cycles daily.
-- **[NBM](./nbm.md):** Uses HREF probabilistic fields as inputs for blended guidance products.
+- **[HRRR](../../../nwp_models/regional/usa/hrrr.md):** Provides 4 of the 10 CONUS HREF members (current + time-lagged), and 4 of the 8 Alaska HREF members. HREFv3 added HRRR to the membership for the first time.
+- **[NAM Nest](../../../nwp_models/regional/usa/nam-nest.md):** Provides 2 members per domain (current + time-lagged). The 12-hour time-lagged NAM Nest is used for some HREF cycles.
+- **HiresW (ARW, FV3):** Provides the foundational 4 members per domain. The HiresW system is itself slated for retirement under PNS 25-41 except for the Guam domain (see [HiresW Guam](../../../nwp_models/regional/usa/hiresw-guam.md)).
+- **[REFS](./refs.md):** Future replacement. REFS is a **true ensemble** built on the [RRFS](../../../nwp_models/regional/usa/rrfs.md) infrastructure — meaning it will use coordinated initial-condition perturbations and stochastic physics rather than the post-processing approach HREF uses. REFS will run to 60 hours (longer than HREF's 48 hours) at 4 cycles daily.
+- **[NBM](../../../nwp_models/regional/usa/nbm.md):** Uses HREF probabilistic fields as inputs for blended guidance products.
 
 ### Heritage: SPC Storm Scale Ensemble of Opportunity (SSEO)
 HREF originated as the SSEO at NSSL and SPC's Hazardous Weather Testbed in the early 2010s. SSEO was an experimental SPC research ensemble that demonstrated skill for six years before EMC adopted the design and made HREF operational at NCEP in 2017. The "ensemble of opportunity" concept — combining whatever convection-allowing model output happens to be operationally available, rather than running purposefully-perturbed ensemble members — is a defining HREF design choice that distinguishes it from true ensemble systems.
