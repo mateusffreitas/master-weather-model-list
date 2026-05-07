@@ -3,7 +3,7 @@
 ## What this model is
 IFS ENS is ECMWF's flagship global ensemble numerical weather prediction system, providing probabilistic medium-range forecasts and quantifying forecast uncertainty for the 0–15 day range.
 
-It is the ensemble counterpart of the deterministic [IFS](./ifs.md), built on the same model core, the same 9 km native horizontal resolution (since Cycle 48r1 in June 2023), and the same atmospheric initial analysis. The ensemble produces 51 members — 50 perturbed plus 1 control — designed to sample uncertainty in both initial conditions (via singular vectors and an Ensemble of Data Assimilations) and in the model itself (via the Stochastically Perturbed Parametrization scheme).
+It is the ensemble counterpart of the deterministic [IFS](../../../nwp_models/global/eu/ifs.md), built on the same model core, the same 9 km native horizontal resolution (since Cycle 48r1 in June 2023), and the same atmospheric initial analysis. The ensemble produces 51 members — 50 perturbed plus 1 control — designed to sample uncertainty in both initial conditions (via singular vectors and an Ensemble of Data Assimilations) and in the model itself (via the Stochastically Perturbed Parametrization scheme).
 
 IFS ENS is widely regarded as one of the highest-skill global ensemble forecast systems in operational use. ECMWF distributes a curated subset of ENS output through the free Open Data programme at 0.25° resolution; the full native 9 km ensemble is also available under CC-BY-4.0 (since 1 October 2025) but typically requires service charges for high-volume delivery.
 
@@ -82,7 +82,7 @@ The IFS ENS is also a key reference baseline for evaluating ECMWF's machine-lear
 - **Retention:** Rolling archive of the most recent 12 forecast runs (~2–3 days)
 - **Open Data streams:**
   - `stream=enfo, type=ef` — direct model output, all 51 members
-  - `stream=enfo, type=cf` — control forecast only (will receive ex-HRES data after Cycle 50r1; see [Upcoming changes](./ifs.md#upcoming-changes) in the IFS entry)
+  - `stream=enfo, type=cf` — control forecast only (will receive ex-HRES data after Cycle 50r1; see [Upcoming changes](../../../nwp_models/global/eu/ifs.md#upcoming-changes) in the IFS entry)
   - `stream=enfo, type=pf` — individual perturbed members (selectable by number)
   - `stream=enfo, type=es` — ensemble spread
   - `stream=enfo, type=ep` — ensemble probability products
@@ -102,8 +102,8 @@ The `ecmwf-opendata` Python client provides programmatic access for ENS data inc
 ---
 
 ## Notes
-- IFS ENS is the ensemble companion to the deterministic [IFS](./ifs.md). The two share the same model core, the same 9 km native resolution (since Cycle 48r1, June 2023), and the same atmospheric analysis.
-- The deterministic IFS (historically "HRES") and the ENS Control member became scientifically and computationally bit-identical in IFS Cycle 49r1 (12 November 2024). With Cycle 50r1 (12 May 2026), the separate HRES is discontinued — the ex-HRES data stream becomes the ENS Control. See the [IFS entry](./ifs.md#upcoming-changes) for migration details.
+- IFS ENS is the ensemble companion to the deterministic [IFS](../../../nwp_models/global/eu/ifs.md). The two share the same model core, the same 9 km native resolution (since Cycle 48r1, June 2023), and the same atmospheric analysis.
+- The deterministic IFS (historically "HRES") and the ENS Control member became scientifically and computationally bit-identical in IFS Cycle 49r1 (12 November 2024). With Cycle 50r1 (12 May 2026), the separate HRES is discontinued — the ex-HRES data stream becomes the ENS Control. See the [IFS entry](../../../nwp_models/global/eu/ifs.md#upcoming-changes) for migration details.
 - IFS ENS is run as a coupled system with ocean, sea ice, and wave components (the ENS-WAM ensemble runs on the same Tco1279 grid as the atmosphere since Cycle 49r1). The atmospheric component is the focus of this entry; the wave ensemble is a separate operational stream (`stream=waef`).
 - The freely-distributed Open Data is a **curated subset** of the operational ENS at reduced resolution. The full native 9 km ensemble and the complete parameter list require ECMWF's commercial/operational data services or the planned 9 km Open Data subset coming later in 2026.
 - The current IFS cycle is **49r1** (operational since 12 November 2024).
@@ -116,7 +116,7 @@ ECMWF also runs a separate **101-member sub-seasonal ensemble** at 36 km (TCo319
 ## Upcoming changes
 
 ### IFS Cycle 50r1 — operational 12 May 2026
-ENS is part of the IFS Cycle 50r1 upgrade, deployed jointly with [AIFS Single v2](./aifs-single.md) and [AIFS ENS v2](./aifs-ens.md). See the [IFS entry](./ifs.md#upcoming-changes) for the full atmospheric model and data-assimilation upgrade list. Key changes specific to ENS users:
+ENS is part of the IFS Cycle 50r1 upgrade, deployed jointly with [AIFS Single v2](../../../nwp_models/global/eu/aifs-single.md) and [AIFS ENS v2](./aifs-ens.md). See the [IFS entry](../../../nwp_models/global/eu/ifs.md#upcoming-changes) for the full atmospheric model and data-assimilation upgrade list. Key changes specific to ENS users:
 
 - **No change in horizontal resolution, vertical resolution, or forecast steps.**
 - **Modified SPP configuration** to address excessive 10 m wind spread in the ensemble — the previous SPP scheme produced over-dispersion in near-surface wind extremes; the revised configuration yields more realistic ensemble spread.
@@ -129,7 +129,7 @@ Cycle 50r2 will complete ECMWF's migration to a GRIB2-only representation for al
 - All Open Data parameters move from mixed GRIB1/GRIB2 to GRIB2 only.
 - Legacy GRIB1-style parameter references move to GRIB2-native parameter identifiers.
 - GRIB2 output uses CCSDS compression, requiring decoder support (for example, `libaec`).
-- See the [IFS entry](./ifs.md#upcoming-changes) and ECMWF's migration documentation for details and test resources.
+- See the [IFS entry](../../../nwp_models/global/eu/ifs.md#upcoming-changes) and ECMWF's migration documentation for details and test resources.
 
 ---
 
