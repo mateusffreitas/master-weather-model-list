@@ -54,14 +54,14 @@ Deterministic global forecasts of:
 - Cloud and hydrometeor fields
 - Heat and cold indices, mean radiant temperature, and globe temperature (added in Cycle 49r1)
 
-The IFS analysis is also used to initialize ECMWF's [AIFS Single](./aifs-single.md), [AIFS ENS](./aifs-ens.md), [IFS ENS](./ecmwf-eps.md), and several downstream limited-area systems run by ECMWF Member States (including AROME, ALADIN, and HARMONIE-AROME family configurations).
+The IFS analysis is also used to initialize ECMWF's [AIFS Single](./aifs-single.md), [AIFS ENS](../../../ensemble_models/global/eu/aifs-ens.md), [IFS ENS](../../../ensemble_models/global/eu/ifs-ens.md), and several downstream limited-area systems run by ECMWF Member States (including AROME, ALADIN, and HARMONIE-AROME family configurations).
 
 ---
 
 ## Relationship to other models
-- **[IFS ENS / ECMWF EPS](./ecmwf-eps.md):** The 51-member ensemble counterpart to IFS, built on the same model core and analyses. As of Cycle 49r1, IFS ENS runs at the same 9 km resolution as the deterministic IFS.
+- **[IFS ENS](../../../ensemble_models/global/eu/ifs-ens.md):** The 51-member ensemble counterpart to IFS, built on the same model core and analyses. As of Cycle 49r1, IFS ENS runs at the same 9 km resolution as the deterministic IFS.
 - **[AIFS Single](./aifs-single.md):** ECMWF's machine-learning deterministic model. Shares IFS analyses for initialization.
-- **[AIFS ENS](./aifs-ens.md):** ECMWF's machine-learning ensemble. Also initialized from IFS analyses.
+- **[AIFS ENS](../../../ensemble_models/global/eu/aifs-ens.md):** ECMWF's machine-learning ensemble. Also initialized from IFS analyses.
 
 The deterministic IFS forecast (historically known as "HRES") and the ENS Control member became scientifically and computationally bit-identical with IFS Cycle 49r1 (12 November 2024). With Cycle 50r1 (12 May 2026), the separate HRES will stop being produced — the data stream formerly known as HRES becomes the ENS Control. See [Upcoming changes](#upcoming-changes) below for migration details.
 
@@ -103,7 +103,7 @@ The `ecmwf-opendata` Python client provides a consistent interface for retrievin
 ## Upcoming changes
 
 ### IFS Cycle 50r1 — operational 12 May 2026
-A major upgrade affecting the atmospheric, wave, and ocean/sea-ice components, deployed jointly with [AIFS Single v2](./aifs-single.md) and [AIFS ENS v2](./aifs-ens.md) on the same day.
+A major upgrade affecting the atmospheric, wave, and ocean/sea-ice components, deployed jointly with [AIFS Single v2](./aifs-single.md) and [AIFS ENS v2](../../../ensemble_models/global/eu/aifs-ens.md) on the same day.
 
 **Key atmospheric changes:**
 - **No change in horizontal resolution, vertical resolution, or forecast steps.**
