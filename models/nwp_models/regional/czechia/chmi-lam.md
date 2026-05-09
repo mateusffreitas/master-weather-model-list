@@ -3,9 +3,9 @@
 ## What this model is
 ALADIN/CHMI is the operational regional limited-area numerical weather prediction (NWP) system run by the Czech Hydrometeorological Institute (CHMI) for short-range forecasting over Czechia and Central Europe.
 
-It is a non-hydrostatic configuration of the **ALADIN system** with **ALARO-1vB physics**, developed and maintained as part of the Regional Cooperation for Limited Area Modeling in Central Europe (**RC LACE**) consortium. Two domains are produced and openly distributed: a **2.3 km Lambert** parent covering Central Europe and a **1 km Czech-Republic** sub-domain.
+It is a non-hydrostatic configuration of the **ALADIN system** with **ALARO-1vB physics**, developed and maintained as part of the Regional Cooperation for Limited Area Modeling in Central Europe (**RC LACE**) consortium. The forecast is run on a single Central-European Lambert-projection domain at ~2.3 km and is openly distributed in two forms: the **native Lambert_2.3km** grid and a **CZ_1km** post-processing reprojection (~1 km regular lat-lon raster) covering Czechia and immediate surroundings.
 
-The system is notable for its **operational biometeorological outputs** (mean radiant temperature and Universal Thermal Climate Index), which are uncommon among national ALADIN deployments and feed into CHMI's national heat-health warning service.
+Internally, CHMI also generates **operational biometeorological diagnostics** (mean radiant temperature and Universal Thermal Climate Index) — uncommon among national ALADIN deployments and used in CHMI's biometeorological forecasting and heat-health warning service — though these particular fields are not part of the open-data feed.
 
 ---
 
@@ -18,9 +18,9 @@ The system is notable for its **operational biometeorological outputs** (mean ra
 
 ## What area it covers
 - **Coverage:** Central Europe, with Czechia near the centre
-- **Domains:**
-  - **Lambert_2.3km** — Central Europe parent domain on a Lambert projection, 1069 × 853 grid points, ~2.3 km grid spacing
-  - **CZ_1km** — Czech Republic and immediately surrounding terrain at ~1 km grid spacing (high-resolution sub-domain)
+- **Distributed grids:**
+  - **Lambert_2.3km** — the **native model grid** ("internal computational domain"); Central Europe on a Lambert projection, 1069 × 853 grid points, ~2.3 km spacing. Includes both surface and pressure-level fields.
+  - **CZ_1km** — a **post-processing product**: the same forecast bilinearly reprojected onto a regular geographic-coordinates raster at ~1 km, covering Czechia and immediate surroundings. Surface fields only (no pressure levels), and a slightly reduced parameter set vs. Lambert_2.3km.
 
 ---
 
@@ -28,12 +28,11 @@ The system is notable for its **operational biometeorological outputs** (mean ra
 - **Model type:** Regional deterministic NWP (limited-area)
 - **Model system / core:** ALADIN, with **ALARO-1vB** physics package
 - **Dynamical formulation:** Non-hydrostatic (NH), spectral, semi-Lagrangian advection, semi-implicit time integration; ICI scheme with 1 iteration
-- **Convection-allowing:** Yes (deep convection explicitly resolved at both 2.3 km and 1 km)
-- **Horizontal resolution:**
-  - Lambert_2.3km: ~2.3 km (linear truncation E539 × 431)
-  - CZ_1km: ~1 km
+- **Convection-allowing:** Yes (deep convection explicitly resolved at the 2.3 km native resolution)
+- **Native horizontal resolution:** ~2.3 km (Lambert projection, 1069 × 853 grid points, linear truncation E539 × 431)
+- **Public distribution grids:** Lambert_2.3km (native) and CZ_1km (~1 km regular lat-lon raster, post-processing reprojection over Czechia)
 - **Vertical levels:** 87 (mean orography)
-- **Time step:** 90 s (Lambert_2.3km)
+- **Time step:** 90 s
 - **Forecast length:** Up to **+72 h** (00, 06, 12, 18 UTC cycles, all to +72 h since January 2025; previously the 18 UTC run went only to +54 h)
 - **Update frequency:** 4× daily (00, 06, 12, 18 UTC)
 - **Temporal output resolution:** Hourly
@@ -58,37 +57,50 @@ The system is notable for its **operational biometeorological outputs** (mean ra
 ---
 
 ## What it provides
-Deterministic forecasts of standard meteorological variables on the model grid, including:
-- 2 m temperature, dew point, and humidity
-- 10 m wind speed, direction, and gust components
-- mean sea-level pressure and surface pressure
-- hourly and accumulated precipitation, precipitation type, snowfall, snow water equivalent
-- low / mid / high / total cloud cover and visibility (incl. visibility in cloud and in precipitation)
-- shortwave and longwave radiation fluxes (downward), sunshine duration
-- maximum simulated reflectivity, lightning flash density
-- pressure-level fields (geopotential, temperature, humidity, wind, vertical velocity, theta) on standard isobaric levels
-- convective diagnostics — Most Unstable CAPE/CIN, Storm Relative Helicity, updraft and downdraft helicity tracks, wind shear (added/revised May 2023)
-- biometeorological outputs — **mean radiant temperature (Tmrt)** and **Universal Thermal Climate Index (UTCI)**, supporting CHMI's biometeorological forecasting and heat-health warning system
+Deterministic forecasts on the model grid, with the following parameters distributed publicly. The two distributed grids share most surface fields; the **Lambert_2.3km** grid additionally carries pressure-level fields and a few surface variables not present on **CZ_1km**.
+
+**Surface fields (both Lambert_2.3km and CZ_1km):**
+- 2 m temperature (incl. hourly maxima/minima at 6 and 18 UTC), dew point, wet-bulb temperature, relative humidity
+- 10 m wind speed and direction
+- maximum 1-hour wind gust (Lambert: split as U and V components; CZ_1km: combined gust speed)
+- mean sea-level pressure, surface temperature, surface geopotential
+- low / mid / high / total cloud cover
+- minimum 1-hour visibility — split into a cloud/fog-driven value and a precipitation-driven value
+- ventilation index
+- downward shortwave (global), longwave, and direct shortwave radiation; sunshine duration (all accumulated from forecast start)
+- snow water equivalent
+- accumulated rainfall, snowfall, and total precipitation
+- most-probable and most-dangerous 1-hour precipitation type (numerical index covering drizzle, rain, mixed, freezing rain, sleet, dry/wet snow, graupel, hail, etc., with separate codes for "occasional" vs persistent)
+- Most-Unstable CAPE
+- lightning flash density (accumulated)
+
+**Lambert_2.3km only:**
+- land–sea mask
+- convective inhibition (CIN)
+- maximum simulated reflectivity in the vertical column (converted to mm/h)
+- pressure-level fields on **17 isobaric levels** (1000, 950, 925, 850, 800, 700, 600, 500, 450, 400, 350, 300, 275, 250, 200, 150, 100 hPa): geopotential, temperature, U and V wind, relative humidity, wet-bulb potential temperature, vertical velocity (omega)
+
+Internally CHMI also runs a richer convective-diagnostics package for forecaster use (Storm Relative Helicity, updraft/downdraft helicity tracks, MUCAPE/CIN/moisture-convergence and CAPE/wind-shear combinations) and the biometeorological diagnostics noted above; these are not part of the open-data feed.
 
 ---
 
 ## Data availability
 - **Is the data free?** Yes
-- **License:** TBD (the CHMI open-data portal does not publish an explicit licence on the NWP ALADIN directory)
+- **License:** TBD (no explicit licence is published with the open-data feed; the parameter-list metadata file `Popis_obsahu.xlsx` accompanying the dataset does not state a licence)
 - **Is the data downloadable?** Yes
-- **Data formats:** GRIB (distributed as **bzip2-compressed `.grb.bz2`** files; one file per variable per cycle, containing all forecast steps)
+- **Data formats:** GRIB (distributed as **bzip2-compressed `.grb.bz2`** files; one file per parameter per cycle, containing all forecast steps for that parameter)
 - **Official download location:**  
   https://opendata.chmi.cz/meteorology/weather/nwp_aladin/  
   with sub-directories `Lambert_2.3km/{00,06,12,18}/` and `CZ_1km/{00,06,12,18}/`
 - **Reference files at the same location:**
-  - `Popis_obsahu.xlsx` — content description (parameter list)
-  - `grib2table` and `gribtab` — GRIB code tables for the distributed parameters
+  - `Popis_obsahu.xlsx` — content description with one sheet per distributed grid (Lambert, CZ1K), listing parameter codes, physical quantity, units, and the precipitation-type index table (in Czech)
+  - `grib2table` and `gribtab` — GRIB code tables for the distributed parameters (consumable by `wgrib2` and `wgrib` respectively)
 
 ---
 
 ## Notes
-- The current high-resolution Lambert_2.3km configuration has been operational since **February 2019**, replacing the previous 4.6 km version with improved resolution, orography, and radiation diagnostics. The CZ_1km sub-domain is a higher-resolution downscaling on the same operational chain.
-- The publicly distributed files use a `ALADLAMB4opendata_*` filename pattern keyed to cycle date/hour and parameter group. Filenames for the CZ_1km domain use a different prefix on the corresponding sub-directory.
+- The current high-resolution Lambert_2.3km configuration has been operational since **February 2019**, replacing the previous 4.6 km version with improved resolution, orography, and radiation diagnostics. **CZ_1km is not a separate model integration** — it is a downstream post-processing product produced by reprojecting the same Lambert_2.3km forecast onto a regular ~1 km lat-lon raster over Czechia, with a reduced parameter list (surface only).
+- **Biometeorological outputs** (mean radiant temperature, UTCI) and the richer convective-diagnostics package described in the 2023–2025 RC LACE / ACCORD posters are computed operationally inside CHMI for forecaster use (and were the subject of Novák 2021), but are **not** included in the public `opendata.chmi.cz` ALADIN feed.
 - **Companion / related ALADIN deployments in the consortium** share much of the same code base and tunings; cross-references to other entries in this repository:
   - [ALADIN Slovakia](../slovakia/aladin-slovakia.md) — RC LACE sister system; SST treatment and L63→L87 cloud retuning developed jointly with CHMI.
   - [ALARO Belgium](../belgium/alaro-belgium.md) — RMI 1.3 km tunings provided via cooperation with CHMI.
