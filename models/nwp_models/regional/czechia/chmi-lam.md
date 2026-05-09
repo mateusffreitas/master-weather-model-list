@@ -86,7 +86,7 @@ Internally CHMI also runs a richer convective-diagnostics package for forecaster
 
 ## Data availability
 - **Is the data free?** Yes
-- **License:** TBD (no explicit licence is published with the open-data feed; the parameter-list metadata file `Popis_obsahu.xlsx` accompanying the dataset does not state a licence)
+- **License:** **Creative Commons Attribution 4.0 International (CC BY 4.0)** — per CHMI's open-data FAQ ("You can use ČHMÚ open data free of charge while respecting the Creative Commons BY 4.0 license"; https://en.chmi.cz/web/chmi.cz/-/jak-mohu-pou%C5%BE%C3%ADvat-otev%C5%99en%C3%A1-data-%C4%8Dhm%C3%BA-). Attribution required.
 - **Is the data downloadable?** Yes
 - **Data formats:** GRIB (distributed as **bzip2-compressed `.grb.bz2`** files; one file per parameter per cycle, containing all forecast steps for that parameter)
 - **Official download location:**  
