@@ -87,7 +87,7 @@ ALADIN-HR output forms the backbone of DHMZ's short-range forecasting system and
 
 ## Publicly available products
 
-> The two endpoints below are **not advertised on the DHMZ public website**. They were provided directly by DHMZ on request, after the maintainer of this repository contacted them about including DHMZ in a list of free and public weather models. Anyone wanting to use this data is encouraged to contact DHMZ directly (dhmz@dhmz.hr) and ask whether they're happy for it to be used for their intended purpose; licensing terms are not stated on the endpoints themselves. The credentials below are the ones DHMZ provided.
+> The two endpoints below are **not advertised on the DHMZ public website**. They were provided directly by DHMZ on request, after the maintainer of this repository contacted them about including DHMZ in a list of free and public weather models. Anyone wanting to use this data is encouraged to contact DHMZ directly (dhmz@dhz.hr) and ask whether they're happy for it to be used for their intended purpose; licensing terms are not stated on the endpoints themselves. The credentials below are the ones DHMZ provided.
 
 ### General meteorological data (NetCDF)
 - Covers the **entire territory of Croatia**
@@ -124,7 +124,7 @@ https://radar.dhz.hr/~aladinhr/opendata/sailing
 
 ## Data availability
 - **Is the data free?** Yes (authentication required; credentials provided by DHMZ on request — see note above)
-- **License:** Not stated on the open-data endpoints. Users are advised to contact DHMZ (dhmz@dhmz.hr) for permission and any conditions of re-use.
+- **License:** Not stated on the open-data endpoints. Users are advised to contact DHMZ (dhmz@dhz.hr) for permission and any conditions of re-use.
 - **Is the data downloadable?** Yes
 - **Data formats:** NetCDF and GRIB (the underlying NWP system also produces PNG visualisations and text-tabular forecasts internally, per the 2025 DHMZ brochure)
 
@@ -176,4 +176,4 @@ The earlier operational chain documented in Tudor et al. (2013) ran ALADIN at 8 
 - Panežić, S., Zajec, A., Stanešić, A. (2024): *DA status Croatia*, Regional Cooperation for Limited Area Modeling in Central Europe (RC LACE), DA Working Days 2024
 - Kovačić, T., Stanešić, A. (2018): *Data assimilation status at DHMZ*, RC LACE DA Working Days, 19–21 September 2018
 - Tudor, M., Ivatek-Šahdan, S., Stanešić, A., Horvath, K., Bajić, A. (2013): *Forecasting Weather in Croatia Using ALADIN Numerical Weather Prediction Model*, in *Climate Change and Regional/Local Responses*, InTech, http://dx.doi.org/10.5772/55698
-- DHMZ contact: dhmz@dhmz.hr — https://meteo.hr
+- DHMZ contact: dhmz@dhz.hr — https://meteo.hr
