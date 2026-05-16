@@ -3,7 +3,7 @@
 ## What this model is
 HiresW Guam is a high-resolution convection-allowing numerical weather prediction system covering Guam and the surrounding western Pacific.
 
-It is the **only remaining HiresW domain** following the retirement of the CONUS, Alaska, Hawaii, and Puerto Rico HiresW domains as part of the RRFSv1 transition (NWS Public Information Statement 25-41). HiresW Guam was explicitly exempted from that retirement because RRFS does not extend to the Guam domain, leaving HiresW as the operational source of convection-allowing guidance for the region.
+It is the **only remaining HiresW domain** following the August 31, 2026 retirement of the CONUS, Alaska, Hawaii, and Puerto Rico HiresW domains as part of the RRFSv1 transition (NWS Service Change Notice 26-48, May 12, 2026; originally proposed under NWS PNS 25-41). HiresW Guam was explicitly exempted from that retirement because RRFS does not extend to the Guam domain, leaving HiresW as the operational source of convection-allowing guidance for the region.
 
 ---
 
@@ -82,4 +82,5 @@ The dual-core design (WRF-ARW and FV3) reflects HiresW's historical role as a te
 
 ## Official documentation
 - NOMADS HiresW product description: https://nomads.ncep.noaa.gov/
+- NWS SCN 26-48 (RRFS and REFS implementation, retirement of CONUS/AK/HI/PR HiresW domains effective August 31, 2026; Guam preserved): https://www.weather.gov/media/notification/pdf_2026/scn26-48_RRFS_and_REFS_Implementation.pdf
 - NWS PNS 25-41 (retirement of other HiresW domains, with Guam explicitly exempted): https://www.weather.gov/media/notification/pdf_2025/pns25-41_RRFS_legacy_model_cessation.pdf
