@@ -1,6 +1,6 @@
 # NAM Nest (North American Mesoscale – High Resolution Nests)
 
-> ⚠️ **Scheduled for retirement.** The NAM Nest is proposed for discontinuation and replacement by the [RRFS](./rrfs.md) per [NWS Public Information Statement 25-41](https://www.weather.gov/media/notification/pdf_2025/pns25-41_RRFS_legacy_model_cessation.pdf) (June 26, 2025). All five nest domains (CONUS, Alaska, Hawaii, Puerto Rico, and the moveable fire weather nest) are included in the retirement.
+> ⚠️ **Scheduled for retirement August 31, 2026 at 12 UTC.** The NAM (12 km parent and all five high-resolution nests, NAM-DNG, DGEX, and NAM MOS) is scheduled for retirement under [NWS Service Change Notice 26-48](https://www.weather.gov/media/notification/pdf_2026/scn26-48_RRFS_and_REFS_Implementation.pdf) (May 12, 2026), the same cycle that brings [RRFS](./rrfs.md) into operations. The retirement set was originally proposed under [NWS PNS 25-41](https://www.weather.gov/media/notification/pdf_2025/pns25-41_RRFS_legacy_model_cessation.pdf) (June 26, 2025). Implementation is subject to the standard CWD/ECE postponement contingency.
 
 ## What this model is
 The NAM Nest is the **collective name for five high-resolution convection-allowing nested domains** run inside each cycle of the [NAM](./nam.md) (North American Mesoscale) production system. Despite its plural nature, "NAM Nest" is commonly used as a singular name in operational practice.
@@ -102,7 +102,7 @@ Unlike [HRRR](./hrrr.md), the NAM Nest covers Hawaii and Puerto Rico operational
 - **[HiresW Guam](./hiresw-guam.md):** Operational convection-allowing guidance for Guam (after the broader HiresW retirement); not produced by the NAM Nest.
 - **[HREF](./href.md):** Multi-model regional ensemble that uses some NAM Nest output as members.
 - **[NBM](./nbm.md):** Uses NAM Nest fields as one of many deterministic inputs.
-- **[RRFS](./rrfs.md):** Future replacement. RRFSv1 (proposed for early 2026) covers CONUS at 3 km, Alaska at 3 km, Hawaii at 2.5 km, and Puerto Rico at 2.5 km, providing functionally equivalent convection-allowing guidance to all NAM Nest domains except the moveable fire weather nest. Many NAM Nest output grids will continue to be produced from RRFS output via post-processing.
+- **[RRFS](./rrfs.md):** Replacement. RRFSv1 implements August 31, 2026 at 12 UTC under SCN 26-48; it covers CONUS at 3 km, Alaska at 3 km, Hawaii at 2.5 km, and Puerto Rico at 2.5 km, providing functionally equivalent convection-allowing guidance to all NAM Nest domains. The 1.5 km fire-weather nest is replaced by a separate relocatable 1.5 km RRFS fire-weather run on a 5° × 5° rotated lat-lon domain. Many NAM Nest output grids will continue to be produced from RRFS output via post-processing.
 
 ---
 
@@ -121,13 +121,13 @@ NAM Nest output is distributed as separate GRIB2 files per nest within the paren
 ---
 
 ## Status and retirement timeline
-- **Proposed for full retirement** in NWS Public Information Statement 25-41 (June 26, 2025), as part of the broader NAM system retirement.
-- All five nest domains (CONUS, AK, HI, PR, fire weather) are included in the proposal.
-- **Replacement deterministic guidance** at convection-allowing scales is provided by [RRFS](./rrfs.md) (3 km CONUS and Alaska, 2.5 km Hawaii and Puerto Rico).
-- The **moveable fire weather nest at 1.5 km** does **not** have a direct equivalent in RRFSv1 — its functionality may be addressed differently in future RRFS versions or through other post-processing.
+- **Scheduled for full retirement August 31, 2026 at 12 UTC** under NWS Service Change Notice 26-48 (May 12, 2026), as part of the broader NAM system retirement; detailed product list in companion SCN 26-47.
+- All five nest domains (CONUS, AK, HI, PR, fire weather) are included.
+- **Replacement deterministic guidance** at convection-allowing scales is provided by [RRFS](./rrfs.md) (3 km CONUS and Alaska, 2.5 km Hawaii and Puerto Rico, with a separate 1.5 km relocatable fire-weather domain).
+- The 1.5 km fire-weather nest is replaced by an operational RRFS fire-weather run on a 5° × 5° rotated latitude–longitude domain, removing the gap previously noted in fire-weather moveable-nest coverage.
+- Originally proposed for early 2026 under PNS 25-41; the date slipped through pre-operational evaluation of RRFSv1 before being scheduled in SCN 26-48. Per SCN 26-48, if August 31, 2026 is declared a Critical Weather Day, an Enhanced Caution Event, or other significant weather is occurring or anticipated, retirement moves to 12 UTC on the next eligible weekday.
 - Some NAM Nest output grids will continue to be produced from RRFS output via post-processing to ease the transition; others will be fully discontinued. EMC has published lists of retained vs. fully discontinued grids:
   - Retained NAM Nest output grids: https://www.emc.ncep.noaa.gov/mmb/mpyle/rrfs_info/namnest_grids.txt
-- Originally targeted for retirement in early 2026 alongside RRFSv1 operational implementation; timeline has slipped along with RRFSv1's implementation date.
 
 ---
 
@@ -135,7 +135,7 @@ NAM Nest output is distributed as separate GRIB2 files per nest within the paren
 - The NAM Nest replaced the older ~5 km NAM CONUS nest and was the first 3 km convection-allowing operational guidance NCEP produced for Hawaii and Puerto Rico — both of which lacked operational convection-allowing coverage prior to the NAM Nest era.
 - The NAM Nest is convection-allowing at 3 km and 1.5 km, similar in resolution to [HRRR](./hrrr.md), but uses entirely different dynamical core (NMMB B-grid vs WRF-ARW), microphysics (Ferrier-Aligo vs Thompson), and data assimilation (NDAS vs HRRRDAS) approaches. The two systems' forecast differences for any given storm reflect both initial-condition and model-formulation differences, not just resolution.
 - The NAM Nest has been **frozen since the v4.0 implementation in March 2017**, when NCEP redirected mesoscale development resources toward the FV3-based RRFS effort. No scientific changes have been made since.
-- The 1.5 km fire weather nest is one of the relatively few operational moveable-domain NWP forecasts globally — most operational systems use fixed domains. This makes it operationally distinctive but also means its retirement will leave a temporary gap in U.S. operational moveable-nest fire weather guidance until equivalent capability is established under RRFS.
+- The 1.5 km fire weather nest is one of the relatively few operational moveable-domain NWP forecasts globally — most operational systems use fixed domains. This makes it operationally distinctive. Under SCN 26-48, the equivalent capability is established in RRFSv1's relocatable 1.5 km fire-weather run on a 5° × 5° rotated lat-lon domain — meaning the moveable-nest fire-weather guidance transitions directly from NAM Nest to RRFS on August 31, 2026 rather than leaving an operational gap.
 - The NMMB dynamical core was developed at NCEP/EMC and has been used in operational NAM since 2011. The B-grid Arakawa staggering and non-hydrostatic formulation differ structurally from the WRF-ARW core used by HRRR and the FV3 core used by RRFS.
 
 ---
@@ -163,7 +163,7 @@ The last NAM upgrade. Headline NAM Nest changes:
 - NAM at EMC: https://emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/nam.php
 - NAM Vlab page: https://vlab.noaa.gov/web/emc/nam
 - NAM v4.0 release notes: https://www.weather.gov/media/nws/Public_release_notes_NAM.v4.0.pdf
-- NWS PNS 25-41 (NAM retirement notice): https://www.weather.gov/media/notification/pdf_2025/pns25-41_RRFS_legacy_model_cessation.pdf
+- NWS SCN 26-48 (RRFS and REFS implementation, NAM Nest retirement effective August 31, 2026): https://www.weather.gov/media/notification/pdf_2026/scn26-48_RRFS_and_REFS_Implementation.pdf
 - Retained NAM Nest output grids: https://www.emc.ncep.noaa.gov/mmb/mpyle/rrfs_info/namnest_grids.txt
 - AWS Open Data: https://registry.opendata.aws/noaa-nam/
 
