@@ -117,7 +117,7 @@ The smoke fields are distributed alongside the standard meteorological fields in
 
 ## Future outlook
 
-RAP is expected to be retired alongside [HRRR](./hrrr.md) as part of the eventual transition to **RRFSv2** (the MPAS-based version of the [Rapid Refresh Forecast System](./rrfs.md)). Unlike the NAM, HiresW (non-Guam), and HREF — which are covered by [NWS Public Information Statement 25-41](https://www.weather.gov/media/notification/pdf_2025/pns25-41_RRFS_legacy_model_cessation.pdf) (June 26, 2025) and slated for retirement alongside RRFSv1 — **RAP and HRRR are explicitly not part of the RRFSv1 retirement**. Both are expected to continue operating in parallel with RRFSv1 until the RRFSv2 transition.
+RAP is expected to be retired alongside [HRRR](./hrrr.md) as part of the eventual transition to **RRFSv2** (the MPAS-based version of the [Rapid Refresh Forecast System](./rrfs.md)). Unlike the NAM, NAM Nest, HiresW (non-Guam), HREF, and SREF — which are scheduled for retirement on August 31, 2026 under [NWS Service Change Notice 26-48](https://www.weather.gov/media/notification/pdf_2026/scn26-48_RRFS_and_REFS_Implementation.pdf) (May 12, 2026, originally proposed under PNS 25-41) — **RAP and HRRR are explicitly not part of the RRFSv1 retirement wave**. Both are expected to continue operating in parallel with RRFSv1 until the RRFSv2 transition.
 
 No formal Service Change Notice for RAP retirement has been issued as of May 2026. The RRFSv2 timeline itself has not been publicly committed; it depends on resolution of issues identified in RRFSv1 evaluation (notably tropical cyclone tracking and convective precipitation overprediction with the FV3 core, which are intended to be addressed by the MPAS dynamical core in v2).
 
