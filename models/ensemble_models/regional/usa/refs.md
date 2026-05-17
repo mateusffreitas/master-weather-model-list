@@ -28,13 +28,21 @@ REFS is scheduled to become operational on **August 31, 2026 at 12 UTC** under N
 
 ## Basic details
 - **Model type:** Regional ensemble NWP (convection-allowing)
-- **Model system / core:** RRFS (UFS / FV3 in v1)
+- **Model system / core:** RRFS (UFS / FV3-LAM in v1)
+- **Dynamical formulation:** Non-hydrostatic, finite-volume on the cubed-sphere limited-area grid (inherited from RRFS / FV3-LAM)
+- **Convection-allowing:** Yes — deep convection is explicitly resolved at the 3 km CONUS/AK and 2.5 km HI/PR domains; no cumulus parameterization is used in the RRFS members. The HRRR members (contributing to the CONUS and Alaska REFS domains) are also convection-allowing at 3 km on WRF-ARW.
 - **Horizontal resolution:**  
   - 3 km (CONUS, Alaska)  
   - 2.5 km (Hawaii, Puerto Rico)
 - **Forecast length:** 60 hours
 - **Update frequency / cycles:** 4× daily (00, 06, 12, 18 UTC)
 - **Temporal output resolution:** Hourly through 60 h
+
+---
+
+## Data assimilation
+- **Data assimilation:** REFS does not perform its own data assimilation.
+- **Method:** REFS inherits the analyses of its contributing systems — primarily the hourly cycling **GSI-based hybrid 3DEnVar** analysis from the deterministic and ensemble [RRFS](../../../nwp_models/regional/usa/rrfs.md) (current and 6 h time-lagged cycles), and additionally the HRRR hourly cycling hybrid ensemble-variational analysis for the two HRRR members contributed to the CONUS and Alaska REFS domains. See the RRFS and [HRRR](../../../nwp_models/regional/usa/hrrr.md) entries for the analysis system details.
 
 ---
 
