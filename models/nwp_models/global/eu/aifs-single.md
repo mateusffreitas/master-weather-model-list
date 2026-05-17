@@ -5,7 +5,7 @@ AIFS Single is ECMWF's operational machine-learning-based global deterministic w
 
 Unlike the physics-based [IFS](./ifs.md), AIFS Single does not solve the equations of fluid dynamics explicitly. Instead, it uses a trained neural network to predict the evolution of the atmosphere directly from historical weather data, producing medium-range forecasts at a fraction of the computational cost of traditional NWP.
 
-AIFS Single runs operationally alongside the physics-based IFS and is designed to complement rather than replace it. It became the world's first machine-learning-driven forecast model fully supported in operations on 25 February 2025, and as of v1.1 has demonstrated forecast skill gains of approximately 12 to 24 hours over IFS in the medium range for several variables.
+AIFS Single runs operationally alongside the physics-based IFS and is designed to complement rather than replace it. It became the world's first machine-learning-driven forecast model fully supported in operations on 25 February 2025, and as of v1.1 had demonstrated forecast skill gains of approximately 12 to 24 hours over IFS in the medium range for several variables.
 
 ---
 
@@ -30,7 +30,7 @@ AIFS Single runs operationally alongside the physics-based IFS and is designed t
 - **Native grid:** N320 reduced Gaussian grid (~31 km, ~0.25°)
 - **Initialization grid:** IFS analyses are interpolated from their native O1280 grid (~0.1°) down to N320 (~0.25°) for input to the AIFS model
 - **Open Data resolution:** 0.25° regular latitude–longitude
-- **Pressure levels:** 13 in v1.1 (50, 100, 150, 200, 250, 300, 400, 500, 600, 700, 850, 925, 1000 hPa); 14 in v2 (adds 10 hPa)
+- **Pressure levels:** 14 (10, 50, 100, 150, 200, 250, 300, 400, 500, 600, 700, 850, 925, 1000 hPa)
 - **Forecast timestep:** 6 hours
 - **Forecast length:** Up to 15 days
 - **Update frequency:** 4× daily (00, 06, 12, 18 UTC)
@@ -40,21 +40,19 @@ AIFS Single runs operationally alongside the physics-based IFS and is designed t
 
 ## What it provides
 Deterministic global forecasts of:
-- Temperature (surface and upper-air pressure levels)
-- Wind components (10 m, 100 m, and upper-air)
-- Geopotential height
+- Temperature (surface and upper-air pressure levels, including 10 hPa for stratospheric representation)
+- Wind components (10 m, 100 m, and upper-air, including 10 hPa)
+- Geopotential height (including 10 hPa)
 - Specific humidity
+- Vertical velocity (including 10 hPa)
 - Mean sea level pressure
 - Total precipitation, convective precipitation, and snowfall
+- Fraction of snow cover
 - Surface short-wave (solar) and long-wave radiation downwards
 - Cloud cover (total, high, mid, low)
 - Soil moisture and soil temperature (two layers)
 - Total column water and runoff water equivalent
-
-AIFS Single v2 (operational 12 May 2026) additionally provides:
-- A new pressure level at **10 hPa** for geopotential, temperature, U, V, and vertical velocity (improving stratospheric representation)
-- A new **fraction of snow cover** parameter
-- A new **wave stream** providing significant wave height, mean wave period, mean wave direction, drag coefficient, and significant wave height partitioned across six period bands (10–12, 12–14, 14–17, 17–21, 21–25, and 25–30 seconds). This is the first time AIFS produces ocean wave forecasts.
+- Wave parameters (new in v2): significant wave height, mean wave period, mean wave direction, drag coefficient, and significant wave height partitioned across six period bands (10–12, 12–14, 14–17, 17–21, 21–25, and 25–30 seconds). This is the first time AIFS produces ocean wave forecasts.
 
 ---
 
@@ -65,7 +63,7 @@ AIFS Single shares the same **initial conditions** as IFS (both start from ECMWF
 
 [AIFS ENS](../../../ensemble_models/global/eu/aifs-ens.md) is the ensemble counterpart trained with probabilistic (CRPS-based) methods.
 
-ECMWF stops running its experimental machine learning model suite (Aurora, FourCastNet, GraphCast, Pangu-Weather) as of the joint AIFS/IFS upgrade on 12 May 2026.
+ECMWF stopped running its experimental machine learning model suite (Aurora, FourCastNet, GraphCast, Pangu-Weather) as of the joint AIFS/IFS upgrade on 12 May 2026.
 
 ---
 
@@ -86,19 +84,8 @@ Unlike IFS, AIFS Single is distributed at its native resolution (0.25°) — the
 
 ## Version history
 
-### AIFS Single v0.2.1 — pre-operational, October 2023
-First publicly available AIFS, distributed via ECMWF Open Data as an experimental model running 4× daily. Used a 13-pressure-level vertical structure and was initialized from regridded IFS analyses.
-
-### AIFS Single v1.0 — operational 25 February 2025
-First operational version. Marked a historic milestone as the first machine-learning-driven forecast model to be made fully operational by any major weather centre.
-
-### AIFS Single v1.1 — operational 27 August 2025 (current)
-Upgraded to address a precipitation forecast issue (point rain artefacts) caused by an over-emphasis of soil moisture in v1.0's training. The fix reduced the soil moisture training contribution by a factor of 100, yielding equivalent skill and bias but without the unphysical artefacts.
-
-Initially implemented on 31 July 2025 but reverted on 1 August due to a `stepRange` GRIB2 metadata issue affecting six accumulated parameters (`cp`, `sf`, etc.). Re-implemented on 27 August 2025 after the metadata issue was fixed. The technical paper documenting v1.1 was published in September 2025 (Moldovan et al., arXiv:2509.18994).
-
-### AIFS Single v2 — scheduled 12 May 2026
-Major upgrade deployed jointly with [IFS Cycle 50r1](./ifs.md#upcoming-changes) and [AIFS ENS v2](../../../ensemble_models/global/eu/aifs-ens.md). Key changes:
+### AIFS Single v2 — operational 12 May 2026 (current)
+Major upgrade deployed jointly with [IFS Cycle 50r1](./ifs.md#recent-version-history) and [AIFS ENS v2](../../../ensemble_models/global/eu/aifs-ens.md). Key changes:
 
 - **New 10 hPa pressure level** for geopotential, temperature, horizontal winds, and vertical velocity. Sudden stratospheric warmings are now represented in AIFS forecasts.
 - **New wave stream** — the first data-driven wave forecasts ECMWF has issued. Significant wave height forecasts improve by ~10% compared to the physics-based IFS Cycle 50r1 wave model.
@@ -108,9 +95,22 @@ Major upgrade deployed jointly with [IFS Cycle 50r1](./ifs.md#upcoming-changes) 
 - **No changes to model architecture** — v2 is the same network as v1.1, just retrained.
 - **Dissemination priority changes** — AIFS Single output priority drops from 90 to 20 on ECPDS (the new wave stream uses priority 30, matching IFS HRES-WAM).
 
-The release candidate phase started 14 April 2026; test data is available via MARS (expver=105) and the open data testdata endpoint. v2 is being upgraded jointly with IFS Cycle 50r1 because v1.1 shows degraded performance when initialized from 50r1 esuite analyses — v2 has been fine-tuned specifically on 50r1 data.
+The release candidate phase ran from 14 April 2026 through the go-live; test data was available via MARS (expver=105) and the open data testdata endpoint. v2 was upgraded jointly with IFS Cycle 50r1 because v1.1 showed degraded performance when initialized from 50r1 esuite analyses — v2 was fine-tuned specifically on 50r1 data.
 
 Known v2 limitations include 2 m temperature degradations in the Arctic during winter (linked to changes in IFS Cycle 50r1 sea-ice–atmosphere coupling that v2 has not yet seen enough training examples of), some smoothing along the Antarctic sea-ice edge in summer wave forecasts, and continued limited skill at 50 and 100 hPa in the tropics.
+
+### AIFS Single v1.1 — operational 27 August 2025
+Upgraded to address a precipitation forecast issue (point rain artefacts) caused by an over-emphasis of soil moisture in v1.0's training. The fix reduced the soil moisture training contribution by a factor of 100, yielding equivalent skill and bias but without the unphysical artefacts.
+
+v1.1 used a 13-pressure-level vertical structure (50, 100, 150, 200, 250, 300, 400, 500, 600, 700, 850, 925, 1000 hPa) — the 10 hPa level was added in v2.
+
+Initially implemented on 31 July 2025 but reverted on 1 August due to a `stepRange` GRIB2 metadata issue affecting six accumulated parameters (`cp`, `sf`, etc.). Re-implemented on 27 August 2025 after the metadata issue was fixed. The technical paper documenting v1.1 was published in September 2025 (Moldovan et al., arXiv:2509.18994).
+
+### AIFS Single v1.0 — operational 25 February 2025
+First operational version. Marked a historic milestone as the first machine-learning-driven forecast model to be made fully operational by any major weather centre.
+
+### AIFS Single v0.2.1 — pre-operational, October 2023
+First publicly available AIFS, distributed via ECMWF Open Data as an experimental model running 4× daily. Used a 13-pressure-level vertical structure and was initialized from regridded IFS analyses.
 
 ---
 
