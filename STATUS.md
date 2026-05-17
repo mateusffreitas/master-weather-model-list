@@ -18,10 +18,11 @@ Major upgrade to the National Blend of Models with longer hourly guidance (36 h 
 - **Authority:** NWS SCN 26-24 (AAC revision, April 28, 2026)
 - **Verification note:** Originally targeted April 15, 2026; rescheduled to April 23, then April 30. The April 30 attempt fell within a Critical Weather Day / Enhanced Caution Event window, triggering the SCN's contingency provision and pushing actual cutover to May 5, 2026.
 
-### IFS Cycle 50r1, AIFS Single v2, AIFS ENS v2 — scheduled May 12, 2026
-ECMWF's physics-based and AI forecast lines upgrade on the same day. 50r1 brings NEMO4-SI3 ocean/sea-ice coupling and physics improvements with no grid change. AIFS v2 adds a 10 hPa pressure level, and AIFS ENS v2 adds a new wave stream.
+### IFS Cycle 50r1, AIFS Single v2, AIFS ENS v2 — operational May 12, 2026
+ECMWF's physics-based and AI forecast lines upgraded together on the same day, as planned. Cycle 50r1 brings fully coupled atmosphere–ocean–sea-ice data assimilation, the new NEMO4-SI3 ocean/sea-ice core, revised convection and cloud-microphysics (addressing stationary heavy rainfall), and over 40 new ocean and sea-ice variables — all with no change in horizontal or vertical resolution. AIFS Single v2 adds a 10 hPa pressure level, a new data-driven wave stream, and a snow cover parameter. AIFS ENS v2 introduces a new probabilistic wave ensemble stream and a multi-scale loss function. The separate HRES stream is discontinued: the ex-HRES data stream becomes the ENS Control (MARS users migrate `stream=enfo, type=cf` → `stream=oper, type=fc` and `stream=scda, type=fc` for 06/18 UTC). ECMWF's experimental external ML model suite (Aurora, FourCastNet, GraphCast, Pangu-Weather) has been discontinued in operations as of the same day.
 - **Entries:** [IFS Open Data](./models/nwp_models/global/eu/ifs-open-data.md) · [ECMWF EPS](./models/ensemble_models/global/eu/ecmwf-eps.md) · [AIFS Single](./models/nwp_models/global/eu/aifs-single.md) · [AIFS ENS](./models/ensemble_models/global/eu/aifs-ens.md)
-- **Authority:** ECMWF Implementation pages
+- **Authority:** ECMWF news release, [IFS Cycle 50r1 and AIFS v2 go live](https://www.ecmwf.int/en/about/media-centre/news/2026/ifs-cycle-50r1-aifsv2-live) (May 12, 2026); [Implementation of IFS Cycle 50r1](https://confluence.ecmwf.int/display/FCST/Implementation+of+IFS+Cycle+50r1); ECMWF Newsletter 185, [Upgrade of IFS Cycle 50r1](https://www.ecmwf.int/en/newsletter/185/earth-system-science/upgrade-ifs-cycle-50r1)
+- **Downstream note:** Individual model entries ([IFS](./models/nwp_models/global/eu/ifs.md), [IFS ENS](./models/ensemble_models/global/eu/ifs-ens.md), [AIFS Single](./models/nwp_models/global/eu/aifs-single.md), [AIFS ENS](./models/ensemble_models/global/eu/aifs-ens.md)) still describe these changes under "Upcoming changes" — they should be migrated to "Version history" / "Recent version history" sections in a follow-up pass.
 
 ### RRFSv1 and REFS — scheduled August 31, 2026 (12 UTC)
 NOAA's next-generation convection-allowing system for North America is now formally scheduled. RRFS and REFS implement together, with legacy NAM, HREF, SREF, and HiresW (all domains except Guam) retiring on the same day. A pre-implementation real-time feed is expected on NOMADS on or about June 9, 2026. **See [UFS.md](./UFS.md) for the full UFS context including the wave of retirements that occurs on the same day.**
@@ -40,6 +41,11 @@ ECCC distributes GDPS Experimental Version 9.0.9 (implemented March 5, 2025) at 
 NOAA's three AI-based global weather systems became operational on the same date, replacing EAGLE SOLO (deterministic) and EAGLE Ensemble. AIGFS and AIGEFS are standalone AI systems based on the GraphCast architecture; HGEFS is a "grand ensemble" combining 31 GEFS physics members with 31 AIGEFS AI members. None of the three replaces an operational physics-based system — they run alongside GFS and GEFS.
 - **Entries:** [AIGFS](./models/nwp_models/global/usa/aigfs.md) · [AIGEFS](./models/ensemble_models/global/usa/aigefs.md) · [HGEFS](./models/ensemble_models/global/usa/hgefs.md)
 - **Authority:** NOAA press release on AI-driven global weather models, December 2025
+
+### AIFS Single v2, AIFS ENS v2 — operational May 12, 2026
+ECMWF's AI deterministic and ensemble forecast systems both upgraded to v2, jointly with IFS Cycle 50r1 (see above). v2 was fine-tuned specifically on Cycle 50r1 esuite analyses, adds a 10 hPa pressure level, and introduces ECMWF's first data-driven wave forecasts (deterministic and ensemble) alongside a new snow cover parameter. AIFS ENS v2 replaces v1's afCRPS loss with a multi-scale loss function.
+- **Entries:** [AIFS Single](./models/nwp_models/global/eu/aifs-single.md) · [AIFS ENS](./models/ensemble_models/global/eu/aifs-ens.md)
+- **Authority:** ECMWF news release, [IFS Cycle 50r1 and AIFS v2 go live](https://www.ecmwf.int/en/about/media-centre/news/2026/ifs-cycle-50r1-aifsv2-live) (May 12, 2026)
 
 ---
 
