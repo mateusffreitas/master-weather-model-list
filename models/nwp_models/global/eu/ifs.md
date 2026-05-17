@@ -63,7 +63,7 @@ The IFS analysis is also used to initialize ECMWF's [AIFS Single](./aifs-single.
 - **[AIFS Single](./aifs-single.md):** ECMWF's machine-learning deterministic model. Shares IFS analyses for initialization.
 - **[AIFS ENS](../../../ensemble_models/global/eu/aifs-ens.md):** ECMWF's machine-learning ensemble. Also initialized from IFS analyses.
 
-The deterministic IFS forecast (historically known as "HRES") and the ENS Control member became scientifically and computationally bit-identical with IFS Cycle 49r1 (12 November 2024). With Cycle 50r1 (12 May 2026), the separate HRES will stop being produced — the data stream formerly known as HRES becomes the ENS Control. See [Upcoming changes](#upcoming-changes) below for migration details.
+The deterministic IFS forecast (historically known as "HRES") and the ENS Control member became scientifically and computationally bit-identical with IFS Cycle 49r1 (12 November 2024). With Cycle 50r1 (12 May 2026), the separate HRES stopped being produced — the data stream formerly known as HRES is now the ENS Control. See [Recent version history](#recent-version-history) below for migration details.
 
 ---
 
@@ -94,37 +94,13 @@ The `ecmwf-opendata` Python client provides a consistent interface for retrievin
 ## Notes
 - The operational IFS runs on a roughly annual major cycle upgrade schedule. Each cycle can shift skill characteristics, biases, and variable distributions — users running long backtests or climatologies should split evaluation windows around cycle transition dates.
 - The freely-distributed Open Data is a **curated subset** of the operational IFS at reduced resolution. For the full-resolution native 9 km output and the complete parameter list, users should consult ECMWF's commercial/operational data services or wait for the 9 km Open Data subset planned for later in 2026.
-- IFS is run as a coupled system with ocean, sea ice, and wave components. The atmospheric component is the focus of this entry; see ECMWF's documentation for details on the wave model (WAM) and ocean/sea-ice coupling, both of which are upgraded materially in Cycle 50r1.
+- IFS is run as a coupled system with ocean, sea ice, and wave components. The atmospheric component is the focus of this entry; see ECMWF's documentation for details on the wave model (WAM) and ocean/sea-ice coupling, both of which were upgraded materially in Cycle 50r1.
 - Heat and cold indices, mean radiant temperature, and globe temperature were added as standard IFS output parameters in Cycle 49r1 (November 2024).
-- The current IFS cycle is **49r1** (operational since 12 November 2024).
+- The current IFS cycle is **50r1** (operational since 12 May 2026).
 
 ---
 
 ## Upcoming changes
-
-### IFS Cycle 50r1 — operational 12 May 2026
-A major upgrade affecting the atmospheric, wave, and ocean/sea-ice components, deployed jointly with [AIFS Single v2](./aifs-single.md) and [AIFS ENS v2](../../../ensemble_models/global/eu/aifs-ens.md) on the same day.
-
-**Key atmospheric changes:**
-- **No change in horizontal resolution, vertical resolution, or forecast steps.**
-- Coupled data assimilation becomes more central: outer-loop coupling between atmosphere and ocean, with a 12-hour ocean analysis running alongside the atmospheric analysis. Microwave imagers and geostationary infrared data now contribute to coupled atmosphere/ocean increments.
-- Weak-constraint 4D-Var formulation extended to the boundary layer, allowing assimilation of 2 m temperature observations across the full 12-hour window (vs the first 6 hours previously).
-- Convection and cloud-microphysics changes addressing stationary precipitation and improving how precipitation propagates inland from the coast.
-- Modified Stochastically Perturbed Parametrisation (SPP) configuration to reduce excessive 10 m wind spread in the ensemble.
-- New glacier parametrisation in the ecLand component (four-layer land-ice scheme replacing the previous binary glacier mask).
-- Improved QBO, stratospheric winds, and stratospheric humidity (radiosonde humidity assimilation reintroduced up to 60 hPa).
-- Solar eclipse effects now represented via accurate astronomical computations.
-- Single-precision computation in the coupled atmosphere–ocean trajectory and reduced-resolution EDA inner loop yield ~40% computational savings.
-- Underlying ocean/sea-ice core moves from NEMO 3.4 + LIM2 to NEMO4-SI3, with fully active coupling. (Mentioned for context — see ECMWF's documentation for details.)
-
-**Stream/archive handling changes (primarily affects MARS and dissemination users):**
-- The separate HRES forecast stops being produced. The data stream formerly known as HRES becomes the **ENS Control** (`stream=oper, type=fc` → `stream=enfo, type=cf`; `stream=scda, type=fc` for 06/18 UTC).
-- Users currently consuming `stream=enfo, type=cf` will need to migrate to `stream=oper, type=fc` (and `stream=scda, type=fc` for 06/18 UTC) — this migration can be done now, ahead of cycle implementation.
-- Wave control forecasts move under the wave stream.
-- Tropical cyclone ensemble products drop from 52 to 51 members (the redundant ex-HRES member is removed).
-- Vegetation fraction difference (`vegdiff`) is discontinued and replaced by Urban cover.
-
-The Release Candidate Phase started on 19 February 2026; test data is available from MARS with experiment version (expver) 0080. Open Data users are not directly affected by the stream/archive changes but should expect to see modest forecast differences from the model upgrade itself.
 
 ### IFS Cycle 50r2 — full GRIB2 transition (tentative Q4 2026)
 Cycle 50r2 will complete ECMWF's migration to a GRIB2-only representation for all parameters. This affects Open Data users directly.
@@ -144,6 +120,27 @@ ECMWF migration resources:
 ---
 
 ## Recent version history
+
+### Cycle 50r1 — operational 12 May 2026 (current)
+A major upgrade affecting the atmospheric, wave, and ocean/sea-ice components, deployed jointly with AIFS Single v2 and AIFS ENS v2 on the same day. The Release Candidate Phase ran from 19 February 2026 through the go-live; test data was available from MARS with experiment version (expver) 0080.
+
+**Key atmospheric changes:**
+- **No change in horizontal resolution, vertical resolution, or forecast steps.**
+- Coupled data assimilation became more central: outer-loop coupling between atmosphere and ocean, with a 12-hour ocean analysis running alongside the atmospheric analysis. Microwave imagers and geostationary infrared data now contribute to coupled atmosphere/ocean increments.
+- Weak-constraint 4D-Var formulation extended to the boundary layer, allowing assimilation of 2 m temperature observations across the full 12-hour window (vs the first 6 hours previously).
+- Convection and cloud-microphysics changes addressing stationary precipitation and improving how precipitation propagates inland from the coast.
+- New glacier parametrisation in the ecLand component (four-layer land-ice scheme replacing the previous binary glacier mask).
+- Improved QBO, stratospheric winds, and stratospheric humidity (radiosonde humidity assimilation reintroduced up to 60 hPa).
+- Solar eclipse effects now represented via accurate astronomical computations.
+- Single-precision computation in the coupled atmosphere–ocean trajectory and reduced-resolution EDA inner loop yields ~40% computational savings.
+- Underlying ocean/sea-ice core moved from NEMO 3.4 + LIM2 to NEMO4-SI3, with fully active coupling. (Mentioned for context — see ECMWF's documentation for details.)
+
+**Stream/archive handling changes (primarily affects MARS and dissemination users):**
+- The separate HRES forecast is no longer produced. The data stream formerly known as HRES is now the **ENS Control** (`stream=oper, type=fc` → `stream=enfo, type=cf`; `stream=scda, type=fc` for 06/18 UTC).
+- Users who consumed `stream=enfo, type=cf` should have migrated to `stream=oper, type=fc` (and `stream=scda, type=fc` for 06/18 UTC) ahead of cycle implementation.
+- Vegetation fraction difference (`vegdiff`) is discontinued and replaced by Urban cover.
+
+Open Data users were not directly affected by the stream/archive changes but should expect to see modest forecast differences from the model upgrade itself.
 
 ### Cycle 49r1 — operational 12 November 2024
 - HRES and ENS Control made scientifically and computationally bit-identical
