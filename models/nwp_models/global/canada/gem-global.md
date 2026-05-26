@@ -5,6 +5,8 @@ The Global Deterministic Prediction System (GDPS) is Canada's primary global num
 
 GDPS is based on the Global Environmental Multiscale (GEM) atmospheric model and operates as a coupled atmosphere–ocean–sea ice prediction system, supplying large-scale guidance and boundary conditions for Canada's regional and high-resolution forecast systems.
 
+As of version 10.0.0 (operational May 26, 2026), GDPS is a **hybrid physics–AI system**: GEM's large-scale temperature and horizontal wind fields are spectrally nudged toward the [GEML](./gdps-geml.md) data-driven AI weather model during the forecast integration. This hybrid configuration — previously distributed as the experimental GDPS — is now the operational system.
+
 ---
 
 ## Who runs it
@@ -21,8 +23,8 @@ GDPS is based on the Global Environmental Multiscale (GEM) atmospheric model and
 ---
 
 ## Basic details
-- **Model type:** Deterministic global NWP, coupled to ocean and sea ice
-- **Model system / core:** GEM (Global Environmental Multiscale) version 5.2
+- **Model type:** Deterministic global NWP, hybrid physics–AI, coupled to ocean and sea ice
+- **Model system / core:** GEM (Global Environmental Multiscale) version 5.2, with large-scale spectral nudging toward the [GEML](./gdps-geml.md) AI weather model (version 1.1)
 - **Dynamical formulation:** Hydrostatic primitive equations
 - **Convection-allowing:** No (~15 km horizontal resolution)
 - **Horizontal resolution:** ~15 km (quasi-uniform 0.135° Yin–Yang grid)
@@ -70,6 +72,17 @@ GDPS provides the large-scale deterministic guidance that underpins Canada's reg
 
 ---
 
+## Hybrid AI-physics forecasting
+Since v10.0.0, GEM's large-scale fields are spectrally nudged toward forecasts from [GEML](./gdps-geml.md) v1.1, ECCC's GraphCast-derived graph neural network AI weather model. The design is deliberately conservative — AI guidance is confined to the large scales and mid-troposphere where data-driven models have demonstrated skill, while GEM physics governs smaller scales, the boundary layer, and the stratosphere:
+- **Nudged fields:** Large-scale temperature and horizontal wind components (u, v).
+- **Vertical profile:** Applied between ~250–850 hPa; no nudging in the planetary boundary layer (>850 hPa) or stratosphere (<250 hPa).
+- **Horizontal scales:** A discrete cosine transform (DCT) spectral filter is applied to the Yin and Yang grids separately — full nudging weight for scales >2750 km, ramping to zero below 2250 km.
+- **Temporal handling:** GEML output is available every 6 hours; at each 450 s GEM time step the target is linearly interpolated between successive GEML forecasts, with a time-varying nudging weight that peaks when GEML output is available and decays in between (relaxation time 3.28125 h).
+
+See [GEML](./gdps-geml.md) for details of the AI model itself. (Husain et al., 2024)
+
+---
+
 ## Data availability
 - **Is the data free?** Yes (no registration required for MSC Open Data)
 - **License:** Environment and Climate Change Canada Data Servers End-use Licence (attribution required; commercial use permitted) — https://eccc-msc.github.io/open-data/licence/readme_en/
@@ -94,7 +107,17 @@ GDPS provides the large-scale deterministic guidance that underpins Canada's reg
 
 ## Recent version history
 
-### GDPS v9.0.0 — operational June 11, 2024 (current)
+### GDPS v10.0.0 — operational May 26, 2026 (current)
+Implemented at the 12 UTC run on May 26, 2026, replacing v9.1.0. The headline change is the introduction of **hybrid AI-physics forecasting**: the configuration previously distributed as the experimental GDPS is now operational.
+
+Headline changes:
+- **Hybrid AI-physics forecasting via spectral nudging.** GEM's large-scale temperature and horizontal wind (u, v) fields between 250–850 hPa are spectrally nudged toward forecasts from **[GEML](./gdps-geml.md) v1.1**, ECCC's graph neural network AI weather model. A DCT-based spectral filter fully constrains scales >2750 km (ramping to zero below 2250 km); the GEML target is refreshed every 6 hours and interpolated in time at each model step (relaxation time 3.28125 h). See *Hybrid AI-physics forecasting* above. (Husain et al., 2024)
+- All other components remain aligned with the v9.1.0 / v9.0.0 operational framework (4DEnVar data assimilation, GEM 5.2 dynamics, NEMO 3.6 / CICE 6.2.0 ice-ocean coupling).
+
+### GDPS v9.1.0 — operational (intervening version)
+An adaptation of GDPS v9.0.0 to ECCC's new High Performance Computing infrastructure. No scientific or configuration changes to the forecast or assimilation systems; not separately documented in this repository.
+
+### GDPS v9.0.0 — operational June 11, 2024
 Implemented at the 12 UTC run on June 11, 2024. Major work was on the data assimilation component, with smaller changes to the atmospheric and ice-ocean forecast components.
 
 Headline changes:
@@ -113,11 +136,9 @@ Headline changes:
 
 ---
 
-## Related: experimental successor
+## Related: AI component
 
-ECCC distributes an experimental successor to the operational GDPS at https://dd.weather.gc.ca/today/model_gdps/ which, per ECCC's own statement at that endpoint, is expected to replace the operational GDPS in 2026. The experimental system (GDPS Experimental Version 9.0.9, implemented March 5, 2025) features hybrid AI-physics forecasting via spectral nudging toward the [GEML](./gdps-geml.md) data-driven weather model, along with substantial updates to data assimilation, sea ice physics, and other components.
-
-See [`gdps-exp.md`](./gdps-exp.md) for full documentation of the experimental system.
+The hybrid forecasting introduced in v10.0.0 relies on [GEML](./gdps-geml.md), ECCC's data-driven AI weather model, as its spectral nudging target. GEML is also distributed as a standalone 10-day forecast product on the MSC datamart. See [`gdps-geml.md`](./gdps-geml.md) for full documentation of the AI model.
 
 ---
 
@@ -131,5 +152,6 @@ See [`gdps-exp.md`](./gdps-exp.md) for full documentation of the experimental sy
 - Buehner, M., et al. (2015). Implementation of Deterministic Weather Forecasting Systems Based on Ensemble–Variational Data Assimilation at Environment Canada. Part I: The Global System. *Mon. Wea. Rev.*, 144, 2532–2559. https://doi.org/10.1175/MWR-D-14-00354.1
 - Côté, J., et al. (1998). The Operational CMC-MRB Global Environmental Multiscale (GEM) Model: Part I — Design Considerations and Formulation. *Mon. Wea. Rev.*, 126, 1373–1395.
 - Girard, C., et al. (2014). Staggered Vertical Discretization of the Canadian Environmental Multiscale (GEM) Model Using a Coordinate of the Log-Hydrostatic-Pressure Type. *Mon. Wea. Rev.*, 142, 1183–1196.
+- Husain, S. Z., et al. (2024). Leveraging data-driven weather models for improving numerical weather prediction skill through large-scale spectral nudging. *arXiv*, arXiv:2407.06100. https://doi.org/10.48550/arXiv.2407.06100
 - Qaddouri, A., and V. Lee (2011). The Canadian Global Environmental Multiscale model on the Yin–Yang grid system. *Q. J. R. Meteorol. Soc.*, 137, 1913–1926.
 - Shahabadi, M. B., and M. Buehner (2024). Implementation of All-Sky Assimilation of Microwave Humidity Sounding Channels in Environment Canada's Global Deterministic Weather Prediction System. *Mon. Wea. Rev.*, 152, 1027–1038.
