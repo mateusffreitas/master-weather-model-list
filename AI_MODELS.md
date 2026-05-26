@@ -14,7 +14,7 @@ Different meteorological centres are integrating AI into weather prediction in d
 
 2. **AI-based ensembles.** Same as above, but trained probabilistically to produce ensemble members, usually by injecting random noise during inference. *Examples: AIFS ENS, AIGEFS.*
 
-3. **Hybrid physics–AI systems.** The physics-based model continues to run the forecast, but AI predictions guide or constrain parts of it — typically through spectral nudging toward AI-generated large-scale fields. *Examples: GDPS-EXP (experimental).*
+3. **Hybrid physics–AI systems.** The physics-based model continues to run the forecast, but AI predictions guide or constrain parts of it — typically through spectral nudging toward AI-generated large-scale fields. *Examples: GDPS (ECCC, operational since v10.0.0 — physics forecast nudged toward the GEML AI model).*
 
 4. **Grand ensembles combining physics and AI members.** Members from a physics-based ensemble and an AI-based ensemble are combined into a single larger ensemble for probabilistic guidance. *Examples: HGEFS.*
 
@@ -45,7 +45,7 @@ These approaches reflect genuinely different theories about how AI should enter 
 - **Approach:** Standalone AI (GraphCast-derived), retrained on ERA5 + ECMWF HRES analyses; weights publicly distributed via HuggingFace
 - **Resolution:** 0.25° (~28 km)
 - **Forecast length:** 10 days
-- **Note:** Also serves as the spectral nudging target for the experimental GDPS (GDPS-EXP), giving it a dual role as both a standalone product and a component of ECCC's hybrid forecasting system.
+- **Note:** Also serves as the spectral nudging target for the operational [GDPS](./models/nwp_models/global/canada/gem-global.md) (since v10.0.0, May 26, 2026), giving it a dual role as both a standalone product and a component of ECCC's hybrid forecasting system.
 
 ---
 
