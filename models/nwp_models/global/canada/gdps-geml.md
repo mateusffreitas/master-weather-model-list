@@ -83,7 +83,7 @@ The 13-level pressure grid is identical to the one used by NOAA's GraphCastGFS a
 GEML is unusual in serving as both a standalone forecast product and an internal component of another operational system:
 
 1. **Standalone forecast product:** Distributed at `/today/model_gdps-geml/25km/` on the MSC datamart as a complete 10-day forecast for direct user consumption.
-2. **AI component of experimental hybrid GDPS:** GEML's large-scale temperature and wind fields are used as the nudging target for the [experimental GDPS (v9.0.9)](./gdps-exp.md), which spectrally nudges its physics-based GEM forecast toward GEML at large scales (>2750 km) in the mid-troposphere (250–850 hPa).
+2. **AI component of the operational hybrid GDPS:** GEML's large-scale temperature and wind fields are used as the nudging target for the operational [GDPS](./gem-global.md) (since v10.0.0, May 26, 2026), which spectrally nudges its physics-based GEM forecast toward GEML at large scales (>2750 km) in the mid-troposphere (250–850 hPa).
 
 This dual role distinguishes GEML from other operational AI models like AIGFS or AIFS Single, which serve only as standalone products without being directly used as components of physics-based hybrid systems.
 
@@ -102,7 +102,6 @@ The four systems share the same underlying GNN architecture and 13-pressure-leve
 
 ### Companion ECCC systems
 - **[Operational GDPS](./gem-global.md):** ECCC's stable physics-based global model. Provides the analysis used to initialize GEML.
-- **[Experimental GDPS (v9.0.9)](./gdps-exp.md):** Hybrid physics-AI system that spectrally nudges its GEM forecast toward GEML's large-scale fields. The two systems are operationally interdependent during the experimental phase.
 
 ---
 
