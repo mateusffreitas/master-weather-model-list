@@ -111,7 +111,7 @@ HRDPS-West provides forecasting guidance to:
 - HRDPS-West is distributed as **experimental data** via the MSC alpha datamart.
 - It is not operationally supported in the same sense as HRDPS, GDPS, RDPS, or other operational ECCC prediction systems.
 - Users requiring operational guidance over Southern BC should continue to use the operational [HRDPS](./hrdps.md) at 2.5 km resolution.
-- HRDPS-West is one of several experimental ECCC systems alongside [GDPS-EXP](../../global/canada/gdps-exp.md) — see the repository's [`STATUS.md`](../../../../STATUS.md) for the current list.
+- HRDPS-West is one of several experimental ECCC systems — see the repository's [`STATUS.md`](../../../../STATUS.md) for the current list.
 
 ---
 
