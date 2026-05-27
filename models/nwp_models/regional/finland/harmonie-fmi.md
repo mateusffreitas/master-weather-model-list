@@ -3,33 +3,33 @@
 ## What this model is
 This entry documents the **Finnish Meteorological Institute (FMI) distribution of HARMONIE (MEPS)** — the MetCoOp Ensemble Prediction System, a high-resolution, convection-permitting regional NWP system based on HARMONIE-AROME.
 
-The underlying model is the **same MetCoOp production** documented in the [MEPS](../norway/meps.md) entry: FMI is a co-producing member of MetCoOp and redistributes the MEPS output through its own Open Data service. What differs is the **access mechanism** (an FMI WFS stored query plus a binary download service) and the **distributed subset** (FMI currently serves surface-level data only). This is not a separate forecast — it is the MetCoOp MEPS run repackaged and delivered through FMI's infrastructure.
+The underlying model is the **same MetCoOp production** documented in the [MEPS](../norway/meps.md) entry: FMI is a co-producing member of MetCoOp (one of the three HPC platforms that runs the MEPS ensemble is FMI's "Vinha") and redistributes the MEPS output through its own Open Data service. What differs is the **access mechanism** (an FMI WFS stored query plus a binary download service) and the **distributed subset** (FMI currently serves surface-level data only). This is not a separate forecast — it is the MetCoOp MEPS run repackaged and delivered through FMI's infrastructure.
 
 ---
 
 ## Who runs it
-- **Organization:** MetCoOp (Meteorological Cooperation on Operational Numerical Weather Prediction). Distributed by the **Finnish Meteorological Institute (FMI)** as one of the MetCoOp member institutes.
-  - MetCoOp member institutes: MET Norway, SMHI (Sweden), FMI (Finland), Estonian Environment Agency (ESTEA), and LEGMC (Latvia, joined 2024)
+- **Organization:** MetCoOp (Meteorological Cooperation on Operational Numerical Weather Prediction). Distributed by the **Finnish Meteorological Institute (FMI)** as one of the MetCoOp member institutes; FMI also hosts one of the three HPC platforms (Vinha) on which the MEPS ensemble is produced.
+  - MetCoOp member institutes: MET Norway, SMHI (Sweden), FMI (Finland, since 2017), Estonian Environment Agency (ESTEA, since 2020), and LEGMC (Latvia, since 2024)
 - **Country / region:** Finland (distributor); multi-national (Nordic and Baltic) production
 
 ---
 
 ## What area it covers
-- **Coverage:** Scandinavia and Finland (Nordic region, including surrounding marine areas) — the MetCoOp MEPS domain
-- **Domain details:** ~2.5 km Lambert grid covering Norway, Sweden, Finland, and surrounding seas. The FMI download service exposes the data via the `harmonie_scandinavia_surface` producer; the default bounding box returned by the WFS query spans approximately 18.1°W–54.2°E and 49.8°N–75.2°N. Users are expected to subset to their area of interest with query parameters.
+- **Coverage:** Scandinavia and Finland (Nordic region, including surrounding marine areas) — the MetCoOp MEPS domain (960 × 1080 grid points at 2.5 km uniform spacing)
+- **Domain details:** The FMI download service exposes the data via the `harmonie_scandinavia_surface` producer; the default bounding box returned by the WFS query spans approximately 18.1°W–54.2°E and 49.8°N–75.2°N. Users are expected to subset to their area of interest with query parameters.
 
 ---
 
 ## Basic details
 - **Model type:** Regional ensemble NWP (convection-permitting) — FMI distributes the surface-level subset
-- **Model system / core:** HARMONIE-AROME (ALADIN-NH non-hydrostatic spectral dynamical core)
+- **Model system / core:** HARMONIE-AROME (ALADIN-NH non-hydrostatic spectral dynamical core), currently cycle 43h2.2
 - **Dynamical formulation:** Non-hydrostatic, spectral, with two-time-level semi-implicit semi-Lagrangian discretization
 - **Convection-allowing:** Yes (deep convection explicitly resolved at 2.5 km; shallow convection parameterized)
 - **Ensemble size:** 30 perturbed members + 1 control (see [MEPS](../norway/meps.md) for the ensemble/time-lagging design)
 - **Horizontal resolution:** ~2.5 km
 - **Vertical levels:** 65 (production); **FMI distributes surface-level fields only** (`levels=0`)
 - **Model top:** 10 hPa (~30 km) in production
-- **Forecast length:** Up to ~66 hours (control); see [MEPS](../norway/meps.md) for per-member details
+- **Forecast length:** Up to 66 hours (control member); 61 hours for the perturbed ensemble members. See [MEPS](../norway/meps.md) for details.
 - **Update frequency / cycles:** Continuous cycling in production (MetCoOp); FMI exposes the latest available runs through `origintime`/`analysisTime`
 - **Temporal output resolution:** 1 hour (selectable via the `timestep` parameter, e.g. 60 minutes)
 
@@ -37,13 +37,13 @@ The underlying model is the **same MetCoOp production** documented in the [MEPS]
 
 ## Data assimilation
 - **Data assimilation:** Yes (MetCoOp production)
-- **Method / cadence:** Upper-air 3D-Var and surface analysis as in the broader HARMONIE-AROME system. See the [MEPS](../norway/meps.md) entry for the full assimilation description; data assimilation is a property of the MetCoOp production, not the FMI distribution layer.
+- **Method / cadence:** Upper-air 3D-Var with large-scale mixing, and surface analysis via CANARI optimal interpolation. Assimilated observations include conventional in-situ (SYNOP, SHIP, buoy, radiosonde), aircraft (AMDAR and Mode-S EHS), GNSS ZTD, weather radar reflectivity and Doppler radial wind, scatterometer, and microwave/IR satellite radiances. See the [MEPS](../norway/meps.md) entry for the full assimilation description; data assimilation is a property of the MetCoOp production, not the FMI distribution layer.
 
 ---
 
 ## Initial and boundary conditions
 - **Initial conditions:** HARMONIE-AROME analyses with ensemble perturbations
-- **Boundary conditions:** ECMWF IFS (lateral boundary conditions)
+- **Boundary conditions:** ECMWF IFS (lateral boundary conditions; Météo-France ARPEGE as automatic backup)
 
 (These are production properties shared with [MEPS](../norway/meps.md).)
 
@@ -105,10 +105,12 @@ FMI and the community provide helper libraries for the open data interfaces:
 ---
 
 ## Notes
-- **Same model as [MEPS](../norway/meps.md), different distribution.** FMI co-produces MetCoOp MEPS and redistributes it. The forecast state is identical to the MET Norway MEPS distribution; the differences are the access mechanism (FMI WFS + binary download service vs MET Norway THREDDS/OPeNDAP), the data format (FMI offers GRIB2/GRIB1/NetCDF; MET Norway offers NetCDF/NCML), and the distributed subset (FMI: surface level only; MET Norway: full vertical structure, ensemble members, cross-sections). This is analogous to how the UWC-West DINI run is repackaged independently by DMI, KNMI, Met Éireann, and the Icelandic Met Office (see [HARMONIE-AROME Ireland](../ireland/harmonie-arome-ireland.md) and [HARMONIE (DMI)](../denmark/harmonie-dmi.md)).
+- **Same model as [MEPS](../norway/meps.md), different distribution.** FMI co-produces MetCoOp MEPS (its Vinha HPC runs members 9, 10, 11 of the ensemble, alongside SMHI/MET Norway's Cirrus and Stratus systems) and redistributes the output. The forecast state is identical to the MET Norway MEPS distribution; the differences are the access mechanism (FMI WFS + binary download service vs MET Norway THREDDS/OPeNDAP), the data format (FMI offers GRIB2/GRIB1/NetCDF; MET Norway offers NetCDF/NCML), and the distributed subset (FMI: surface level only; MET Norway: full vertical structure, ensemble members, cross-sections). This is analogous to how the UWC-West DINI run is repackaged independently by DMI, KNMI, Met Éireann, and the Icelandic Met Office (see [HARMONIE-AROME Ireland](../ireland/harmonie-arome-ireland.md) and [HARMONIE (DMI)](../denmark/harmonie-dmi.md)).
 - **Surface-level subset only.** FMI's documentation states that currently only data near the ground or sea surface (surface level) is provided in gridded form. The full ensemble, model-level, and pressure-level fields are available from the MET Norway distribution.
 - **Point time series.** In addition to the gridded product, FMI also serves HARMONIE (MEPS) as point time series via separate stored queries (see FMI's time series data documentation).
+- **No FMI HARMONIE on AWS S3.** FMI mirrors only its SILAM atmospheric composition model and radar data to AWS Open Data; HARMONIE (MEPS) is **not** on S3 and must be accessed via the WFS / binary download routes above.
 - **No account required.** Unlike the Met Éireann distribution of the sibling UWC-West HARMONIE production (which requires free registration), FMI's open data needs no account — only acceptance of the CC BY 4.0 licence and adherence to the request limits.
+- **Companion suites.** MetCoOp also operates two related products built on the MEPS modelling grid: **MNWC** (a deterministic 12-hour nowcasting suite refreshed hourly, partly produced on FMI's Vinha HPC) and **MECaS** (a calibrated ensemble forecast of near-surface temperature, wind, and gusts). These are documented in the [MEPS](../norway/meps.md) entry's notes. FMI does not currently appear to redistribute MNWC or MECaS through this Open Data service.
 - **Relationship to siblings:**
   - [MEPS](../norway/meps.md) — the MET Norway distribution of the same MetCoOp production (full distribution; primary reference for model internals).
   - [AROME-Arctic](../norway/arome-arctic.md) — MET Norway's deterministic Arctic-domain HARMONIE-AROME model.
@@ -125,4 +127,5 @@ FMI and the community provide helper libraries for the open data interfaces:
 - FMI Open Data — data models: https://en.ilmatieteenlaitos.fi/open-data-manual-data-models
 - FMI WFS GetCapabilities: https://opendata.fmi.fi/wfs?request=GetCapabilities
 - CC BY 4.0 licence text: https://creativecommons.org/licenses/by/4.0/
-- See the [MEPS](../norway/meps.md) entry for HARMONIE-AROME model references (Bengtsson et al. 2017, etc.) and MetCoOp production documentation.
+- Eresmaa et al. (2026), *The Operational Forecast Process at MetCoOp*, Bull. Amer. Meteor. Soc., 107, E946–E963. https://doi.org/10.1175/BAMS-D-25-0225.1
+- See the [MEPS](../norway/meps.md) entry for further HARMONIE-AROME and MetCoOp references.
