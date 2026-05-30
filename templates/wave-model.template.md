@@ -30,7 +30,15 @@
 ## Forcing and nesting
 - **Wind forcing:** <source model + wind level (usually 10 m)> (TBD)
 - **Ice forcing (if applicable):** <source + rules/thresholds> (TBD)
+- **Current forcing (if applicable):** <source + one-way forcing vs two-way coupling> (TBD)
 - **Nested inside / parent for:** <optional>
+
+---
+
+## Data assimilation (optional)
+- **Assimilates wave observations:** <Yes/No> (TBD)
+- **Observation sources (if yes):** <e.g., satellite altimeter SWH, SAR wave spectra; name missions if documented> (TBD)
+- **Method / cadence (optional):** <e.g., Optimal Interpolation, daily cycle> (TBD)
 
 ---
 
@@ -46,6 +54,7 @@ Wave forecasts including (as available):
 
 ## Data availability
 - **Is the data free?** Yes / No / Partial
+- **License:** <e.g., Copernicus Marine Service licence (registration required) / CC BY 4.0 / Public domain (U.S. government work; CC0-equivalent) / Etalab Open Licence> (note attribution or share-alike obligations if applicable; TBD)
 - **Is the data downloadable?** Yes / No
 - **Data formats:** <GRIB2 / NetCDF / both>
 - **Official download location:**  
@@ -55,6 +64,13 @@ Wave forecasts including (as available):
 
 ## Notes
 - <Any quirks: regional domains, coastal grids, multiple nested products, public subset vs full ops.>
+- <Coupling and family relationships: two-way wave–ocean coupling, parent global model, regional nests, or distribution variants of the same core model (e.g., a Copernicus Marine distribution vs the operator's own distribution).>
+- <For AI-based or hybrid wave systems, note the AI approach here and update [`AI_MODELS.md`](../AI_MODELS.md).>
+
+---
+
+## Recent version history (optional)
+<Include this section if the model has documented operational upgrades worth tracking — wave systems change operator, driving NWP model, assimilation setup, and coupling often enough that this is frequently warranted. See `amm15-ww3-uk.md` for an example documenting an operator and assimilation-methodology change. Otherwise omit.>
 
 ---
 
