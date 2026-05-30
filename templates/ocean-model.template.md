@@ -118,6 +118,7 @@
 
 ## Data availability
 - **Is the data free?** [Yes / Yes with registration / Conditional]
+- **License:** [e.g., Copernicus Marine Service licence (registration required) / Public domain (U.S. government work; CC0-equivalent) / CC BY 4.0 / Etalab Open Licence] (note attribution or share-alike obligations if applicable; TBD)
 - **Is the data downloadable?** [Yes / Yes via specific channels]
 - **Data formats:** [NetCDF-4, GRIB2, etc., and CF conventions if relevant]
 - **Product identifier:** [Formal product ID if applicable]
@@ -127,7 +128,6 @@
 - **Official access:** [URL]
 - **DOI:** [If available]
 - **Delivery mechanism:** [Toolbox, NOMADS, AWS Open Data, FTP, HTTPS, etc.]
-- **Licence:** [Specific licence — Copernicus Marine, NOAA public domain, CC-BY, etc.]
 
 ---
 
@@ -157,7 +157,7 @@
 [If this is a global system that provides boundary conditions for regional downscalings, list them. If this is a regional system, identify its parent global product.]
 
 ### AI-based counterparts
-[If applicable — many physics-based ocean systems now have neural-network counterparts trained on their reanalyses (e.g., GLONET trained on GLORYS12). Cross-reference.]
+[If applicable — many physics-based ocean systems now have neural-network counterparts trained on their reanalyses (e.g., GLONET trained on GLORYS12). Cross-reference. When adding a new AI-based system, also update [`AI_MODELS.md`](../AI_MODELS.md).]
 
 ---
 
