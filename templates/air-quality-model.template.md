@@ -72,12 +72,13 @@ Forecasts of atmospheric composition and air quality, typically including:
 - Carbon monoxide (CO)
 - Sulfur dioxide (SO2)
 - <Add specialty outputs if applicable: wildfire smoke, dust, volcanic ash, pollen, etc.>
-- <Derived indices: AQI, health-related indices if produced>
+- <Derived indices: AQI, AQHI, health-related indices if produced>
 
 ---
 
 ## Data availability
 - **Is the data free?** Yes / No / Partial
+- **License:** <e.g., CC BY 4.0 / Open Government Licence – Canada / Public domain (U.S. government work; CC0-equivalent) / Copernicus licence (registration and licence acceptance required) / Etalab Open Licence> (note attribution or share-alike obligations if applicable; TBD)
 - **Is the data downloadable?** Yes / No
 - **Data formats:** <GRIB2 / NetCDF / both> (include compression notes if relevant)
 - **Official download location:**  
@@ -87,8 +88,14 @@ Forecasts of atmospheric composition and air quality, typically including:
 
 ## Notes
 - <Anything important: scope of public data vs full operational, unusual update timing, quirks of domain coverage, known biases or limitations.>
-- <Note whether the model is part of a broader system (e.g., coupled with a specific NWP suite, or part of a national air quality program).>
+- <Note whether the model is part of a broader system or programme (e.g., coupled with a specific NWP suite, a component of a national air quality programme like NAQFC, or a member of a multi-model ensemble like CAMS Regional).>
 - <Mention any seasonal or episodic variation in product availability, such as wildfire-only runs.>
+- <For AI-based or hybrid composition systems, note the AI approach here and update [`AI_MODELS.md`](../AI_MODELS.md).>
+
+---
+
+## Recent version history (optional)
+<Include this section if the model has documented operational upgrades worth tracking — air quality systems change driving NWP model, emissions inventories, and chemistry versions often enough that this is frequently warranted. See `raqdps.md` and `aqm.md` for examples. Otherwise omit.>
 
 ---
 
