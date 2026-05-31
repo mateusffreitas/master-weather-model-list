@@ -9,6 +9,7 @@ The available templates are:
 - [`ocean-model.template.md`](./ocean-model.template.md) — ocean physics forecast models (temperature, salinity, currents, sea level, sea ice)
 - [`tropical-cyclone-model.template.md`](./tropical-cyclone-model.template.md) — tropical cyclone / hurricane forecast models
 - [`air-quality-model.template.md`](./air-quality-model.template.md) — air quality and atmospheric composition models
+- [`nowcasting-model.template.md`](./nowcasting-model.template.md) — nowcasting systems (observation extrapolation, seamless extrapolation–NWP blends, and ML-based 0–6 h prediction)
 
 How to use:
 1. Copy the template that best fits the model category.
