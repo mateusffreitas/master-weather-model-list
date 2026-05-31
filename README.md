@@ -18,6 +18,7 @@ No meteorology background is required to use this repository.
 ## What this repository includes
 - **Numerical Weather Prediction (NWP) models** (deterministic)
 - **Ensemble forecast models** (global and regional)
+- **Nowcasting systems** (0–6 h prediction by observation extrapolation, seamless extrapolation–NWP blending, or machine learning)
 - **Wave forecast models**
 - **Ocean physics models** (temperature, salinity, currents, sea level, sea ice — distinct from wave models)
 - **Tropical cyclone / hurricane models**
@@ -37,7 +38,7 @@ No meteorology background is required to use this repository.
 ## What this repository does NOT include
 - Models or satellite data behind paywalls, commercial licensing, or usage-fee structures
 - Data that requires approval gates, vetted-user programs, or commercial-use restrictions beyond simple registration
-- Models that only provide maps or viewers without downloadable data
+- Models that only provide maps or viewers without downloadable data (this excludes the many nowcasting products distributed only as web radar loops or viewer animations)
 - Research-only or one-off model runs that are not distributed by an operating agency
 - Climate reanalysis or historical-only datasets
 - Commercial weather satellites and Earth observation missions outside the operational weather/atmospheric scope
@@ -51,7 +52,7 @@ A note on experimental systems: some entries document systems their operators ex
 ## Repository structure
 
 Forecast models are organized by:
-- **Model type** (weather, ensemble, wave, ocean, tropical cyclone, air quality)
+- **Model type** (weather, ensemble, nowcasting, wave, ocean, tropical cyclone, air quality)
 - **Geographic scope** (global vs regional)
 - **Country or organization of origin**
 
