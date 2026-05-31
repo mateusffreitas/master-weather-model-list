@@ -47,6 +47,16 @@ These approaches reflect genuinely different theories about how AI should enter 
 - **Forecast length:** 10 days
 - **Note:** Also serves as the spectral nudging target for the operational [GDPS](./models/nwp_models/global/canada/gem-global.md) (since v10.0.0, May 26, 2026), giving it a dual role as both a standalone product and a component of ECCC's hybrid forecasting system.
 
+### [AICON-Global (DWD)](./models/nwp_models/global/germany/aicon-global.md)
+- **Operator:** Deutscher Wetterdienst (DWD)
+- **Status:** Provided for evaluation, research, and training (introduced September 3, 2025; Open Data available early 2026); not part of the operational ICON suite
+- **Approach:** Standalone AI, Anemoi framework; GraphCast-like encoder–processor–decoder with a Graph-Transformer GNN, built directly on ICON's triangular mesh
+- **Training data:** ICON-DREAM reanalysis (2010–2023)
+- **Resolution:** ~13 km (native ICON R3B07 icosahedral grid; also regular lat–lon)
+- **Vertical structure:** 13 reduced ICON model levels (SLEVE), surface to ~50 hPa
+- **Forecast length:** Up to 180 hours
+- **Note:** DWD's first AI-based forecast model; complements but does not replace the physics-based [ICON](./models/nwp_models/global/germany/icon-global.md). A limited-area extension (AICON-LAM) is on the roadmap for 2026–2027.
+
 ---
 
 ## Ensemble AI global models
@@ -129,6 +139,7 @@ The two operational lineages share architecture and a 13-pressure-level vertical
 
 ### ECMWF in-house architecture
 - **[AIFS Single](./models/nwp_models/global/eu/aifs-single.md)** and **[AIFS ENS](./models/ensemble_models/global/eu/aifs-ens.md)** use ECMWF's own encoder–processor–decoder architecture with attention-based GNN encoder/decoder and sliding-window transformer processor. Not derived from GraphCast or FourCastNet.
+- **[AICON-Global](./models/nwp_models/global/germany/aicon-global.md)** (DWD) shares the Anemoi encoder–processor–decoder framework with AIFS, applied to ICON's icosahedral mesh and model-level vertical structure rather than ECMWF's lat–lon / pressure-level setup.
 
 ---
 
