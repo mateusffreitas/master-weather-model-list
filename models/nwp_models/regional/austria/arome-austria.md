@@ -40,7 +40,7 @@ It is designed for short-range forecasting of small-scale and rapidly evolving w
 - **Data assimilation:** Yes
 - **Method / cadence:** **3D-Var** for upper-air, **optimal interpolation (OI)** for surface; cycled every 3 hours with a ±90 minute assimilation window
 - **Background-error covariance:** C-LAEF EDA climatological B-matrix (shared with the C-LAEF ensemble)
-- **Observations assimilated:** Conventional surface (SYNOP, TAWES), aircraft (AMDAR, Mode-S MRAR), radiosonde (TEMP, including TEMP-radiosonde), wind profiler, SCADA wind-energy observations, atmospheric motion vectors (GeoWind from MSG-2/3), satellite radiances (AMSU-A, MHS, ATMS from NOAA-18/19/20, SNPP, MetOp-B/C; IASI from MetOp-B/C; SEVIRI water-vapour channels), ASCAT scatterometer winds, weather radar reflectivity and radial winds, INCA-RR precipitation analysis, GNSS ZTD, GPS radio occultation bending angles, ceilometer cloud cover (converted to RH; introduced operationally in the September 2023 C-LAEF upgrade and shared with AROME-Aut). The assimilation system is shared in setup with the C-LAEF control run.
+- **Observations assimilated:** Conventional surface (SYNOP, SHIP, TAWES), aircraft (Mode-S, AMDAR), radiosonde (BUFR TEMP), atmospheric motion vectors (SEVIRI-HR / GeoWind), ceilometer cloud cover (converted to RH; introduced operationally in the September 2023 C-LAEF upgrade), and ASCAT scatterometer winds. The assimilation system is shared in setup with the C-LAEF control run. *(Note: satellite radiances, weather radar, GNSS-ZTD, GNSS-RO and wind-profiler data are assimilated by the higher-resolution AROME-RUC system, not by AROME-Aut/C-LAEF.)*
 
 ---
 
@@ -80,6 +80,7 @@ GeoSphere Austria publishes the dataset as `nwp-v1-1h-2500m` (1-hour output, 250
 ---
 
 ## Notes
+- **Current framing (2026):** As of the 6th ACCORD ASW (April 2026), GeoSphere describes its operational AROME suite as two configurations — C-LAEF (the 2.5 km / L90 16+1 ensemble on ECMWF ATOS, with its control run mirrored on GeoSphere's local HPC) and the 1.2 km AROME-RUC nowcasting system. The deterministic "AROME-Aut" run is this mirrored C-LAEF control; the standalone "AROME-Aut" label is no longer used separately in the most recent documentation, though the configuration is unchanged (cy43t2bf11+).
 - AROME-Aut and the **C-LAEF control run** are configured identically but run on different HPC platforms, so the C-LAEF control can act as an operational backup for AROME-Aut. C-LAEF is the 16+1-member regional ensemble companion (same 2.5 km / L90 setup), running on the ECMWF ATOS HPC system. **AROME-RUC** is a separate higher-resolution (1.2 km) rapid-update configuration covering Austria with hourly cycling.
 - Hardware: AROME-Aut and AROME-RUC run on GeoSphere Austria's **HPE CRAY-XD2000** cluster (100 nodes, AMD Genoa, Slingshot 11 interconnect, Lustre 200 TB), operational for all NWP systems since **15 January 2025**. The previous HPE Apollo 8600 system was retired at that point. The C-LAEF control run continues to operate on the ECMWF ATOS XH2000.
 - Organizational note: GeoSphere Austria was formed by the 2023 merger of ZAMG with the Geological Survey of Austria; older publications and documentation refer to ZAMG.
@@ -90,14 +91,23 @@ GeoSphere Austria publishes the dataset as `nwp-v1-1h-2500m` (1-hour output, 250
 
 ## Recent version history
 
+### Forward look — C-LAEF AlpeAdria (1 km, successor to "C-LAEF 1k")
+The "C-LAEF 1k" development has matured into **C-LAEF AlpeAdria**, a 1 km ensemble developed jointly with ARSO (Slovenia) and DHMZ (Croatia), expected to replace operational C-LAEF — and thus the configuration mirrored as the AROME-Aut deterministic control — during summer 2026. It runs on ECMWF ATOS in lagged mode with quadratic spectral truncation, uses newer cycles (cy46t1+ / cy48t3bf3 for the EnVar member), and includes a 3D-EnVar member supporting direct reflectivity assimilation (extending the control variable to hydrometeors rather than the 1D+3D-Var Bayesian approach).
+
 ### 2025-01-15 — Migration to new HPC
 All GeoSphere Austria operational NWP systems (AROME-Aut, AROME-RUC, and other on-site components) migrated to the new **HPE CRAY-XD2000** cluster. AROME-Aut continues to run with the cy43t2bf11 setup; the migration was a hardware change rather than a model upgrade.
 
 ### 2023 (September) — Shared assimilation upgrades with C-LAEF
 The September 2023 C-LAEF upgrade introduced changes that AROME-Aut shares through its common assimilation framework, most notably the assimilation of **ceilometer-derived cloud cover** (converted to relative humidity), which improves low-stratus forecasts in autumn and winter. The same upgrade replaced the hybrid model-physics perturbation scheme in C-LAEF with a pure stochastic parameter perturbation (SPP) scheme — this change applies to the ensemble and not to the deterministic AROME-Aut.
 
-### Forward look — C-LAEF 1k
-Although outside the scope of this deterministic entry, GeoSphere Austria is developing **C-LAEF 1k**, a 1 km / 16+1 member ensemble in cooperation with Slovenia and Croatia, running in lagged mode since early 2025 with a southward domain extension. It is expected to influence the future direction of AROME-Aut's configuration as well.
+### December 2021 — Major upgrade to cycle cy43t2
+A major upgrade migrated AROME-Aut (together with C-LAEF and AROME-RUC) from cy40t1 to cy43t2. Beyond the cycle change, the AROME-Aut deterministic configuration received:
+- Adapted screening-level diagnostics (for the `LCANOPY=.T.` case) to improve 2 m temperature and relative-humidity performance in the Alpine region
+- A modified 3D-Var setup (new B-matrix, REDNMC tuning)
+- A switch of orography input from GTOPO30 to GMTED2010
+- Additional forecast parameters: precipitation type, updraft helicity, and a weather-symbol code
+
+Prior to this upgrade, AROME-Aut ran cy40t1 with CANARI/OI + 3D-Var assimilation on the HPE Apollo 8600. (The GTOPO30 → GMTED2010 switch here is the origin of the orography setting recorded above.)
 
 ---
 
@@ -108,6 +118,10 @@ Although outside the scope of this deterministic entry, GeoSphere Austria is dev
 - GeoSphere Austria homepage: https://www.geosphere.at
 
 ### Key references
+- Meier, F., Schneider, S., Awan, N., Deacu, D., Goger, B., Neduncheran, A., Wastl, C., Weidle, F. (2026). *NWP related activities in Austria.* 6th ACCORD All Staff Workshop, Marrakech, Morocco, 13–17 April 2026.
+- Wittmann, C., Awan, N., Neduncheran, A., Meier, F., Scheffknecht, P., Wastl, C., Weidle, F. (2023). *NWP related activities in Austria.* 45th EWGLAM & 30th SRNWP Meeting, Reykjavík, Iceland, 25–28 October 2023.
+- Wittmann, C., Meier, F., Schneider, S., Weidle, F., Wastl, C., Awan, N., Scheffknecht, P. (2022). *NWP related activities in AUSTRIA.* 2nd ACCORD All Staff Workshop, Ljubljana, 4–8 April 2022.
+- Wittmann, C., Meier, F., Schneider, S., Weidle, F., Wastl, C., Awan, N., Scheffknecht, P. (2021). *NWP related activities in AUSTRIA.* 1st ACCORD All Staff Workshop, online, 12–16 April 2021.
 - Weidle, F., Awan, N., Neduncheran, A., Meier, F., Scheffknecht, P., Wastl, C., Wittmann, C. (2024). *NWP related activities in AUSTRIA.* 4th ACCORD All Staff Workshop, Norrköping, Sweden, 15–19 April 2024.
 - Weidle, F., Awan, N., Deacu, D., Neduncheran, A., Meier, F., Schneider, S., Wastl, C., Wittmann, C. (2025). *NWP related activities in AUSTRIA.* 5th ACCORD All Staff Workshop, Zalakaros, Hungary, 31 March – 4 April 2025.
 - Montmerle, T., Michel, Y., Arbogast, E., Ménétrier, B., Brousseau, P. (2018). *A 3D ensemble variational data assimilation scheme for the limited-area AROME model: Formulation and preliminary results.* Quarterly Journal of the Royal Meteorological Society, 144(716): 2196–2215. https://doi.org/10.1002/qj.3334
