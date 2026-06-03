@@ -57,17 +57,74 @@ NBM guidance is the primary foundation for official NWS gridded forecasts in the
 
 ---
 
+## Input models
+
+NBM ingests a large, evolving set of deterministic, ensemble, statistical, and marine inputs from five operational centres: **NOAA/NWS**, the **Canadian Meteorological Centre (CMC / ECCC)**, **ECMWF**, the **U.S. Navy (FNMOC)**, and the **Australian Bureau of Meteorology (BoM)**. The list below reflects the v5.0 input set; resolutions are the input resolution NBM ingests, not necessarily the source model's native grid.
+
+**Global (deterministic)**
+- GFS ~0.125° (NOAA)
+- ECMWF (HRES) 0.10° (ECMWF) — was 0.25° before v5.0
+- GDPS 0.25° (CMC)
+- NAVGEM 0.5° (FNMOC)
+- ACCESS-G (BoM)
+- ECAIFS — ECMWF AI/IFS hybrid (added in v5.0; temperature, wind, QPF)
+- AIGFS — NOAA AI global model (added in v5.0; temperature, wind, QPF)
+
+**Regional (deterministic)**
+- RAP ~13 km (NOAA)
+- RDPS ~10 km (CMC)
+- NAM 12 km (NOAA) — *to be removed in v5.0.1*
+
+**High-resolution / convection-allowing (deterministic)**
+- HRRR 3 km (NOAA)
+- HAFS (NOAA, tropical cyclone) — supersedes the HWRF/HMON 2 km labels still shown on the legacy inputs graphic
+- NAM Nest 3 km (NOAA) — *to be removed in v5.0.1*
+- HiResARW 2.5 km, HiResARW2 2.5 km, HiResFV3 2.5 km (NOAA HiResW family) — *to be removed in v5.0.1*
+- GTCM / wTCM tropical-cyclone wind module (NHC) — supplies 10 m wind in v5.0
+
+**Ensembles**
+- GEFS 0.25° (NOAA)
+- ECMWF Ensemble (ECMWFE) 0.20° (ECMWF) — was 0.5° before v5.0
+- GEPS 0.5° and REPS ~10 km (CMC)
+- NAVGEM ensemble (FNMOC)
+- ACCESS ensemble (BoM)
+- GEWPS / REWPS wave ensembles
+- 10 Canadian members (mix of GDPS/GEPS/RDPS/REPS) added to the winter suite in v5.0
+- SREF — *removed in v5.0* (was 16 km CONUS / 30 km AK)
+
+**Statistical / MOS**
+- GFS-MOS, GFS GMOS, NAM GMOS, ECMWF MOS, ECMWFE MOS
+- LAMP / gridded LAMP (GLMP)
+
+**Marine / ocean**
+- RTOFS ~0.3° (NOAA) and RIOPS (CMC) — marine and ice/ocean inputs
+
+> **Note on the webinar "NBM Inputs" graphic:** The April 15, 2026 NBM user webinar (slide 4) shows a pre-v5.0 input graphic that still lists SREF, lower-resolution ECMWF (0.25°/0.5°), and HWRF/HMON, and omits ECAIFS and AIGFS. Treat that graphic as a historical snapshot; the list above reflects the v5.0 operational set.
+
+---
+
 ## Data availability
 - **Is the data free?** Yes
+- **License:** Public domain (U.S. government work; CC0-equivalent)
 - **Is the data downloadable?** Yes
-- **Data formats:** GRIB2
+- **Data formats:** GRIB2 and ASCII/text bulletins (NBH/NBS/NBE/NBX/NBP)
 - **Official download locations:**  
-  https://registry.opendata.aws/noaa-nbm/  
-  https://nomads.ncep.noaa.gov/pub/data/nccf/com/blend/prod/
+  https://registry.opendata.aws/noaa-nbm/ (realtime + archive back to May 2020)  
+  https://nomads.ncep.noaa.gov/pub/data/nccf/com/blend/prod/ (realtime; ~2-day retention)
+
+### Text bulletin products
+| Label | Product | Time step | Forecast hours |
+|---|---|---|---|
+| NBH | Hourly | Hourly | 1–25 h |
+| NBS | Short | 3-hourly | 6–72 h |
+| NBE | Extended | 12-hourly | 24–192 h |
+| NBX | Super-Extended | 12-hourly | 204–264 h |
+| NBP | Probabilistic (Extended) | 12-hourly | 24–264 h |
 
 ---
 
 ## Notes
+- **Operational role:** NBM is the starting point for the NWS gridded forecast in the Days 0–3 period (with WFOs making local edits) and now serves directly as the Days 4–7 CONUS gridded forecast, with only minor edits from the Weather Prediction Center in consultation with WFOs; the same Days 4–7 role is being extended to Alaska. NBM also supplies key tools for NWS Impact-Based Decision Support Services (IDSS).
 - NBM blends input from a large and evolving set of deterministic and ensemble models, including global, regional, and convection-allowing systems.
 - Bias correction methods include decaying averages, quantile mapping (QM), and dynamically weighted model contributions. NBM v5.0 expands QM usage to instantaneous temperature, dew point, apparent temperature, relative humidity, 12-hour max/min RH, and significant wave height — replacing decaying-average logic for those fields.
 - NBM v5.0 introduces a new "percentile picking" method for deterministic wind speed and gust forecasts, modulating away from the mean QM value based on where the mean sits relative to the model distribution and climatology.
@@ -79,6 +136,9 @@ NBM guidance is the primary foundation for official NWS gridded forecasts in the
 ## Planned future versions
 
 > **Status:** Unofficial. As of June 2026 there is no NWS Service Change Notice or PNS for either release below, and neither appears on the NBM versions page. The details here come from NOAA/NWS presentation decks and should be treated as a planning signal, not a commitment. No implementation date is recorded here pending a formal SCN.
+
+### PRO-GUIDES (long-term successor program)
+The NBM user webinar (April 15, 2026) describes the **Next-Generation Probabilistic Forecast Guidance Suite (PRO-GUIDES)** as the longer-term direction beyond the v5.x line. A blueprint has been drafted and a technical feasibility team tasked with assessing current vs. needed resources. The stated intent is to apply modern machine-learning / AI techniques to perform smarter blending and bias correction and to better predict high-impact events. This is a program-level aspiration with no version number, schedule, or SCN.
 
 ### NBM v5.1 (planned, not scheduled)
 Outlined in the NBM user webinar (April 15, 2026) and the WPC/HMT "NBMv5 Winter Overview" (February 10, 2026). Planned scope:
@@ -95,6 +155,8 @@ The same decks indicate that the RRFS/REFSv1 implementation will likely force an
 **Sources (presentation decks, not formal notices):**
 - NBM user webinar slides, April 15, 2026: https://www.weather.gov/media/wrn/calendar/NBMUserWebinar4-15-26.pdf
 - WPC/HMT "NBMv5 Winter Overview" slides, February 10, 2026: https://www.wpc.ncep.noaa.gov/hmt/hmt_webpages/seminars/wwe/2026/slides_20260210.pdf
+
+---
 
 ## Version history
 
