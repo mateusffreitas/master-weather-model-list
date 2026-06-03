@@ -118,7 +118,7 @@ The following systems are productionizations of research AI architectures that a
 Some operational models do not themselves use AI but incorporate AI-model outputs as inputs to their blending or post-processing logic.
 
 ### [NBM v5.0 (NOAA)](./models/nwp_models/regional/usa/nbm.md)
-As of NBM v5.0 (operational April 15, 2026), the National Blend of Models incorporates ECAIFS (ECMWF's AI/IFS hybrid) and AIGFS as inputs for temperature, wind speed, and QPF products.
+As of NBM v5.0 (operational May 5, 2026), the National Blend of Models incorporates two AI-based global models as inputs — **ECAIFS** (ECMWF's AI/IFS hybrid) and **AIGFS** (NOAA's operational GraphCast-lineage model) — for temperature, wind speed, and QPF products. Both are ingested as deterministic inputs. NBM's input set evolves version-to-version, so the AI-input mix is expected to grow as further AI systems go operational (see [STATUS.md](./STATUS.md) and the [NBM entry](./models/nwp_models/regional/usa/nbm.md) for the full input list and planned changes).
 
 ---
 
