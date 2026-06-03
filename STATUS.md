@@ -40,9 +40,6 @@ NOAA's next-generation convection-allowing system for North America is now forma
 - **Authority:** NWS SCN 26-48 (May 12, 2026); product retirements detailed in companion SCN 26-47
 - **Verification note:** Originally targeted early 2026; slipped through pre-operational evaluation. The August 31 date is subject to the standard CWD/ECE contingency — if the implementation date is declared a Critical Weather Day, an Enhanced Caution Event, or other significant weather is occurring or anticipated, implementation moves to 12 UTC on the next eligible weekday. NBM v5.0 was deferred under exactly this provision earlier in 2026, so the contingency is not theoretical.
 
-### GDPS-EXP — expected to replace operational GDPS in 2026
-ECCC distributes GDPS Experimental Version 9.0.9 (implemented March 5, 2025) at https://dd.weather.gc.ca/today/model_gdps/, and per ECCC's own statement at that endpoint, the experimental system is "expected to replace in 2026, the current Global Deterministic Prediction System (GDPS) data." This is a directional signal rather than a fixed implementation date — no formal Service Change Notice has been issued.
-
 ---
 
 ## Recently operational (AI weather systems)
