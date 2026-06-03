@@ -86,12 +86,12 @@ These approaches reflect genuinely different theories about how AI should enter 
 - **Total members:** 62
 - **Note:** Does not replace either GEFS or AIGEFS; provides a larger, more diverse ensemble
 
-### [GDPS-EXP (ECCC) — experimental](./models/nwp_models/global/canada/gdps-exp.md)
+### [GDPS (ECCC)](./models/nwp_models/global/canada/gem-global.md)
 - **Operator:** ECCC / Canadian Meteorological Centre
-- **Status:** Experimental; expected to replace operational GDPS in 2026 per ECCC's own statement
+- **Operational since:** May 26, 2026 (v10.0.0, replacing v9.1.0)
 - **Approach:** GEM physics model spectrally nudged toward GEML at large scales (>2750 km) in the mid-troposphere (250–850 hPa); physics handles everything else
 - **Resolution:** ~15 km, 84 levels, 10-day forecast 2× daily
-- **Note:** Beyond AI-physics hybridization, v9.0.9 includes substantial updates to data assimilation (4DEnVar with 256-member LETKF backgrounds from GEPS 8.0.0), sea ice physics (CICE 6.2.0), and other components.
+- **Note:** The configuration previously distributed as the experimental GDPS, now operational. Beyond AI-physics hybridization, v10.0.0 carries forward the v9.0.0 framework (4DEnVar with 256-member LETKF backgrounds from GEPS 8.0.0, CICE 6.2.0 sea ice, NEMO 3.6 ice-ocean coupling).
 
 ---
 
