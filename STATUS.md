@@ -6,7 +6,7 @@ The goal is to give users a single place to check "what is changing" without hav
 
 For UFS-related transitions specifically, see [UFS.md](./UFS.md), which provides the full programme context. UFS items are listed here briefly; UFS.md has the detailed narrative.
 
-Last updated: May 2026.
+Last updated: June 2026.
 
 ---
 
@@ -17,6 +17,11 @@ Major upgrade to the National Blend of Models with longer hourly guidance (36 h 
 - **Entry:** [NBM](./models/nwp_models/regional/usa/nbm.md)
 - **Authority:** NWS SCN 26-24 (AAC revision, April 28, 2026)
 - **Verification note:** Originally targeted April 15, 2026; rescheduled to April 23, then April 30. The April 30 attempt fell within a Critical Weather Day / Enhanced Caution Event window, triggering the SCN's contingency provision and pushing actual cutover to May 5, 2026.
+
+### NBM v5.1 — planned, no formal schedule
+The next National Blend of Models upgrade after v5.0. Planned scope: 12-hour winter products, fixes for "blocky" percentile and precipitation-type (ptype) fields, remaining post-v5.0 winter-weather guidance work, and a new Southwest Pacific domain (a coverage expansion rather than a methodology change). No NWS Service Change Notice or PNS has been issued and it does not appear on the NBM versions page — this is a planning signal only, and no implementation date is recorded here pending a formal notice.
+- **Entry:** [NBM](./models/nwp_models/regional/usa/nbm.md)
+- **Source:** NBM user webinar (April 15, 2026) and WPC/HMT "NBMv5 Winter Overview" (February 10, 2026) — presentation decks, not authoritative notices
 
 ### IFS Cycle 50r1, AIFS Single v2, AIFS ENS v2 — operational May 12, 2026
 ECMWF's physics-based and AI forecast lines upgraded together on the same day, as planned. Cycle 50r1 brings fully coupled atmosphere–ocean–sea-ice data assimilation, the new NEMO4-SI3 ocean/sea-ice core, revised convection and cloud-microphysics (addressing stationary heavy rainfall), and over 40 new ocean and sea-ice variables — all with no change in horizontal or vertical resolution. AIFS Single v2 adds a 10 hPa pressure level, a new data-driven wave stream, and a snow cover parameter. AIFS ENS v2 introduces a new probabilistic wave ensemble stream and a multi-scale loss function. The separate HRES stream is discontinued: the ex-HRES data stream becomes the ENS Control (MARS users migrate `stream=enfo, type=cf` → `stream=oper, type=fc` and `stream=scda, type=fc` for 06/18 UTC). ECMWF's experimental external ML model suite (Aurora, FourCastNet, GraphCast, Pangu-Weather) has been discontinued in operations as of the same day.
