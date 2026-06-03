@@ -5,9 +5,9 @@ GEML (Global Environmental eMuLator) is Environment and Climate Change Canada's 
 
 It is a graph neural network derived from Google DeepMind's GraphCast architecture (Lam et al., 2023), with weights retrained and refined by ECCC using ERA5 reanalysis (1979–2016) and ECMWF operational analyses (2016–2021). Like other standalone AI weather models, GEML does not solve the equations of fluid dynamics explicitly; instead, it predicts atmospheric evolution directly from learned patterns in historical weather data, producing forecasts orders of magnitude faster than conventional physics-based NWP.
 
-GEML serves two distinct roles operationally. First, it is distributed as its own forecast product through the MSC datamart — a complete 10-day twice-daily global forecast in its own right. Second, it provides the reference large-scale temperature and wind fields that the experimental [GDPS](./gem-global.md) (version 9.0.9) is spectrally nudged toward, making it the AI component of ECCC's hybrid physics-AI forecasting effort.
+GEML serves two distinct roles operationally. First, it is distributed as its own forecast product through the MSC datamart — a complete 10-day twice-daily global forecast in its own right. Second, it provides the reference large-scale temperature and wind fields that the operational [GDPS](./gem-global.md) (v10.0.0, operational since May 26, 2026) is spectrally nudged toward, making it the AI component of ECCC's hybrid physics-AI forecasting effort.
 
-The current version is GEML 1.0, distributed alongside the experimental GDPS 9.0.9 (implemented March 5, 2025).
+GEML is the AI component of the operational GDPS v10.0.0 (operational since May 26, 2026), and is also distributed as a standalone forecast product on the MSC datamart.
 
 ---
 
@@ -121,9 +121,8 @@ The HuggingFace distribution makes GEML one of the few operational AI weather mo
 ---
 
 ## Status
-- GEML is distributed as **experimental data** as a component of the experimental GDPS (v9.0.9) ecosystem.
-- It is not operationally supported in the same sense as the standard GDPS, GEPS, or other operational ECCC systems.
-- The experimental GDPS — and by extension GEML's role as the nudging source — is in pre-operational scientific evaluation as of 2025.
+- GEML's large-scale fields became an operational input on May 26, 2026, when GDPS v10.0.0 — which spectrally nudges toward GEML — replaced v9.1.0 as ECCC's operational global deterministic system.
+- GEML is also distributed as a standalone forecast product through the MSC datamart.
 - ECCC's April 2026 supercomputer upgrade to H100 GPU infrastructure is the enabling hardware for routine operational AI inference; GEML inference is GPU-accelerated and was not feasible within ECCC's pre-2026 operational compute envelope.
 
 ---
