@@ -59,47 +59,66 @@ NBM guidance is the primary foundation for official NWS gridded forecasts in the
 
 ## Input models
 
-NBM ingests a large, evolving set of deterministic, ensemble, statistical, and marine inputs from five operational centres: **NOAA/NWS**, the **Canadian Meteorological Centre (CMC / ECCC)**, **ECMWF**, the **U.S. Navy (FNMOC)**, and the **Australian Bureau of Meteorology (BoM)**. The list below reflects the v5.0 input set; resolutions are the input resolution NBM ingests, not necessarily the source model's native grid.
+NBM ingests a large, evolving set of deterministic, ensemble, statistical, and wave/marine inputs from five operational centres: **NOAA/NWS**, the **Canadian Meteorological Centre (CMC / ECCC)**, **ECMWF**, the **U.S. Navy (FNMOC)**, and the **Australian Bureau of Meteorology (BoM)**. The list below reflects the v5.0 input set; resolutions are the input resolution NBM ingests, not necessarily the source model's native grid.
+
+These models are used to build the various NBM products, and the mix differs from element to element and regionally. For detail on which inputs feed a given output, see the [NBM Weather Elements table](https://vlab.noaa.gov/web/mdl/nbm-weather-elements) and, for a live view of which models were available for the latest 24 hours of runs, the [NBM dashboard](https://blend.mdl.nws.noaa.gov/nbm-dashboard).
+
+> **Note on resolutions:** The SCN 26-24 v5.0 resolution upgrades (ECMWF 0.10°, ECMWF Ensemble 0.20°, GDPS 15 km, REPS 10 km) are reflected below. The official [NBM Model Inputs table](https://vlab.noaa.gov/web/mdl/nbm-model-inputs) still shows the pre-upgrade values (0.25°/0.50°/25 km/15 km) for these four; the SCN is authoritative.
 
 **Global (deterministic)**
-- GFS ~0.125° (NOAA)
-- ECMWF (HRES) 0.10° (ECMWF) — was 0.25° before v5.0
-- GDPS 0.25° (CMC)
+- GFS 0.125° (~13 km) (NOAA)
+- ECMWF (HRES) 0.10° (ECMWF) — upgraded from 0.25° in v5.0
+- GDPS 15 km (CMC) — upgraded from 25 km in v5.0
 - NAVGEM 0.5° (FNMOC)
-- ACCESS-G (BoM)
-- ECAIFS — ECMWF AI/IFS hybrid (added in v5.0; temperature, wind, QPF)
-- AIGFS — NOAA AI global model (added in v5.0; temperature, wind, QPF)
+- ACCESS-G 12 km (BoM)
+- ECAIFS 0.25° — ECMWF AI/IFS hybrid (added in v5.0; temperature, wind, QPF)
+- AIGFS 0.25° — NOAA AI global model (added in v5.0; temperature, wind, QPF) — *SCN 26-24 states 0.25°; the official inputs table lists 13 km*
 
 **Regional (deterministic)**
-- RAP ~13 km (NOAA)
-- RDPS ~10 km (CMC)
+- RAP 13 km (NOAA) — hourly
+- RAP-EXT 13 km (NOAA) — extended RAP, 4×/day
+- RDPS 10 km (CMC)
 - NAM 12 km (NOAA) — *to be removed in v5.0.1*
 
 **High-resolution / convection-allowing (deterministic)**
-- HRRR 3 km (NOAA)
-- HAFS (NOAA, tropical cyclone) — supersedes the HWRF/HMON 2 km labels still shown on the legacy inputs graphic
+- HRRR 3 km (NOAA) — hourly
+- HRRR-EXT 3 km (NOAA) — extended HRRR, 4×/day
+- HiResW ARW 3 km, HiResW ARW MEM2 3 km, HiResW FV3 3 km (NOAA HiResW family) — *to be removed in v5.0.1; resolution per the official inputs table (a 2.5 km figure appears in some sources but is unconfirmed)*
 - NAM Nest 3 km (NOAA) — *to be removed in v5.0.1*
-- HiResARW 2.5 km, HiResARW2 2.5 km, HiResFV3 2.5 km (NOAA HiResW family) — *to be removed in v5.0.1*
-- GTCM / wTCM tropical-cyclone wind module (NHC) — supplies 10 m wind in v5.0
+- HWRF 1.5 km, HMON 1.5 km (NOAA, tropical cyclone) — *listed as the TC inputs on the official v5.0 inputs table; NOAA still produces both. HAFS is the newer operational TC system, but whether it has replaced HWRF/HMON as NBM inputs is unconfirmed.*
 
 **Ensembles**
-- GEFS 0.25° (NOAA)
-- ECMWF Ensemble (ECMWFE) 0.20° (ECMWF) — was 0.5° before v5.0
-- GEPS 0.5° and REPS ~10 km (CMC)
-- NAVGEM ensemble (FNMOC)
-- ACCESS ensemble (BoM)
-- GEWPS / REWPS wave ensembles
+- GEFS 0.25° (NOAA) — 30 members
+- ECMWF Ensemble (ECMWFE) 0.20° (ECMWF) — upgraded from 0.50° in v5.0; 50 members
+- GEPS 0.5° (CMC) — 20 members
+- REPS 10 km (CMC) — upgraded from 15 km in v5.0; 20 members
+- NAVGEM ensemble (NAVGEME) 50 km (FNMOC) — 20 members
+- ACCESS ensemble (ACCESS-GE) 35 km (BoM) — 18 members
+- HREF 5 km (NOAA) — 8 members
 - 10 Canadian members (mix of GDPS/GEPS/RDPS/REPS) added to the winter suite in v5.0
 - SREF — *removed in v5.0* (was 16 km CONUS / 30 km AK)
 
-**Statistical / MOS**
-- GFS-MOS, GFS GMOS, NAM GMOS, ECMWF MOS, ECMWFE MOS
-- LAMP / gridded LAMP (GLMP)
+**Statistical / MOS / analysis**
+- GFS-MOS (GFS MOS STN), GMOS, NAM MOS (NAMMOS), ECMWF MOS (EC MOSD), ECMWF Ensemble MOS (EC MOSE)
+- LAMP MOS (LAMPMOS) and gridded LAMP (GLMP, 2.5 km, hourly)
+- MELD 2.5 km (NOAA) — gridded LAMP "Meld" stream, hourly
+- QMD 2.5 km (MDL) — NBM quantile-mapped stream
+- RTMA 2.5 km (NOAA) — Real-Time Mesoscale Analysis, used as an input, hourly
 
-**Marine / ocean**
-- RTOFS ~0.3° (NOAA) and RIOPS (CMC) — marine and ice/ocean inputs
+**Wave / marine**
+- GFS WW3D 25 km (NOAA)
+- GEFS WW3E 25 km (NOAA) — 30 members
+- WW3D HIRES 9–17 km (NOAA)
+- GLWU 2.5 km (NOAA) — Great Lakes waves
+- GEPS Waves 25 km (CMC) — 20 members
+- NAVGEM Waves: NAVGEMD 100 km, NAVGEME 50 km (FNMOC) — NAVGEME 20 members
+- REWPS 2.5 km (CMC) — 20 members; *new in v5.0*
 
-> **Note on the webinar "NBM Inputs" graphic:** The April 15, 2026 NBM user webinar (slide 4) shows a pre-v5.0 input graphic that still lists SREF, lower-resolution ECMWF (0.25°/0.5°), and HWRF/HMON, and omits ECAIFS and AIGFS. Treat that graphic as a historical snapshot; the list above reflects the v5.0 operational set.
+> **Flags for verification:**
+> - **RTOFS / RIOPS:** previously listed here as ocean/ice inputs, but neither appears on the official v5.0 inputs table. Confirm whether NBM still ingests them.
+> - **GTCM / wTCM:** the NHC tropical-cyclone wind module previously listed here does not appear on the official v5.0 inputs table.
+
+> **Note on the webinar "NBM Inputs" graphic:** The April 15, 2026 NBM user webinar (slide 4) shows a pre-v5.0 input graphic that still lists SREF, lower-resolution ECMWF, and HWRF/HMON, and omits ECAIFS and AIGFS. Treat that graphic as a historical snapshot; the list above reflects the v5.0 operational set.
 
 ---
 
