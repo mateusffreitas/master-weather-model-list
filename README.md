@@ -27,7 +27,7 @@ No meteorology background is required to use this repository.
 - **Operational weather satellites** with openly distributed raw data (Level 1 calibrated radiances, Level 2 retrievals)
 - **Free and publicly downloadable data**, including:
   - Data with no account required (e.g., NOAA NOMADS, AWS Open Data buckets)
-  - Data requiring free registration or a free API key (e.g., EUMETSAT Data Store, KNMI Data Platform, Météo-France public API, JMA GISC Tokyo)
+  - Data requiring free registration or a free API key (e.g., EUMETSAT Data Store, KNMI Data Platform, Météo-France public API)
   - Data distributed under free open licenses (e.g., Creative Commons Attribution 4.0, Etalab Open Licence, Copernicus Marine Service licence, NOAA public domain)
 - Models provided by government, publicly funded, or military institutions that distribute output openly
 - **Global**, **regional**, **coastal**, and **storm-centered** forecast systems
@@ -43,7 +43,7 @@ No meteorology background is required to use this repository.
 - Climate reanalysis or historical-only datasets
 - Commercial weather satellites and Earth observation missions outside the operational weather/atmospheric scope
 
-A note on free registration: some operators (notably EUMETSAT, KNMI, and JMA's GISC Tokyo service) require a free account to download data. These are not paywalls — there is no fee, no approval gate, and no commercial-use restriction. Entries clearly note when registration is required so users know what to expect.
+A note on free registration: some operators (notably EUMETSAT and KNMI) require a free account to download data. These are not paywalls — there is no fee, no approval gate, and no commercial-use restriction. Entries clearly note when registration is required so users know what to expect.
 
 A note on experimental systems: some entries document systems their operators explicitly label as experimental. These are included when the operating agency distributes the data through an operational or near-operational channel (e.g., ECCC's MSC datamart, NOAA NOMADS). Pure research code, one-off runs, and systems without ongoing public distribution are not included.
 
