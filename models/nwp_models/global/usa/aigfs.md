@@ -5,7 +5,7 @@ The Artificial Intelligence Global Forecast System (AIGFS) is NOAA's operational
 
 It is a fine-tuned productionization of Google DeepMind's GraphCast architecture (Lam et al., 2023), retrained by NOAA's Environmental Modeling Center (EMC) using NOAA's own Global Data Assimilation System (GDAS) analyses paired with ECMWF ERA5 reanalysis as training targets. Unlike traditional physics-based NWP, AIGFS does not solve the equations of fluid dynamics explicitly; instead, it predicts atmospheric evolution directly from learned patterns in historical weather data, producing 16-day forecasts in roughly 40 minutes on GPU hardware.
 
-AIGFS is the operational descendant of NOAA's experimental EAGLE SOLO program (which itself was based on the experimental [GraphCastGFS](./graphcastgfs.md) system) and runs alongside the physics-based [GFS](./gfs.md) as a complement, not a replacement. It became operational at 12 UTC on December 17, 2025, alongside its ensemble counterparts [AIGEFS](../../../ensemble_models/global/usa/aigefs.md) and [HGEFS](../../../ensemble_models/global/usa/hgefs.md), as the first AI-based global weather forecast systems implemented by NOAA in operations.
+AIGFS is the operational descendant of NOAA's experimental EAGLE SOLO program (which itself was based on the experimental GraphCastGFS system) and runs alongside the physics-based [GFS](./gfs.md) as a complement, not a replacement. It became operational at 12 UTC on December 17, 2025, alongside its ensemble counterparts [AIGEFS](../../../ensemble_models/global/usa/aigefs.md) and [HGEFS](../../../ensemble_models/global/usa/hgefs.md), as the first AI-based global weather forecast systems implemented by NOAA in operations.
 
 The current operational version is AIGFS v1.0.
 
@@ -62,7 +62,7 @@ The current operational version is AIGFS v1.0.
 - Mean sea level pressure
 - Total precipitation
 
-This 13-pressure-level vertical structure is the canonical GraphCast operational configuration, identical to the one used by [GraphCastGFS](./graphcastgfs.md), ECCC's [GEML](../canada/gdps-geml.md), and ECMWF's [AIFS Single](../eu/aifs-single.md) v1 (which has since added a 14th level at 10 hPa in v2). Compared with the physics-based [GFS](./gfs.md) (which provides ~30 isobaric levels and a much wider parameter set), AIGFS is a deliberately stripped-down dataset focused on the variables the GraphCast architecture directly predicts.
+This 13-pressure-level vertical structure is the canonical GraphCast operational configuration, identical to the one used by GraphCastGFS, ECCC's [GEML](../canada/gdps-geml.md), and ECMWF's [AIFS Single](../eu/aifs-single.md) v1 (which has since added a 14th level at 10 hPa in v2). Compared with the physics-based [GFS](./gfs.md) (which provides ~30 isobaric levels and a much wider parameter set), AIGFS is a deliberately stripped-down dataset focused on the variables the GraphCast architecture directly predicts.
 
 ---
 
@@ -99,7 +99,7 @@ AIGFS is intended primarily for **synoptic-scale and large-scale forecasting**, 
 ## Relationship to other models
 
 ### Lineage within NOAA's AI program
-- **[GraphCastGFS](./graphcastgfs.md)** (NCEP, experimental) — earlier productionization that AIGFS evolved from. GraphCastGFS v2.0 introduced GDAS-based fine-tuning; AIGFS v1.0 inherits this approach with refinements.
+- **GraphCastGFS** (NCEP, experimental) — earlier productionization that AIGFS evolved from. GraphCastGFS v2.0 introduced GDAS-based fine-tuning; AIGFS v1.0 inherits this approach with refinements.
 - **EAGLE SOLO** (decommissioned operationally) — the experimental demonstration system that AIGFS replaced. EAGLE SOLO v1.0 ran from April 24, 2024 to December 18, 2025. The EAGLE SOLO AWS bucket continues to host **experimental AIGFSdev forecasts** for ongoing AIGFS development (see Notes below).
 - **[AIGEFS](../../../ensemble_models/global/usa/aigefs.md)** (operational) — the 31-member AI-based ensemble counterpart to AIGFS, implemented on the same date.
 - **[HGEFS](../../../ensemble_models/global/usa/hgefs.md)** (operational) — the hybrid "grand ensemble" combining 31 GEFS physics members with 31 AIGEFS AI members, also implemented on the same date.
@@ -107,13 +107,13 @@ AIGFS is intended primarily for **synoptic-scale and large-scale forecasting**, 
 ### Architectural peers (GraphCast family)
 AIGFS is part of a broader family of operational productionizations of the GraphCast architecture. All share the same ~37M-parameter GNN architecture and the 13-pressure-level vertical structure, but differ in training data, fine-tuning procedures, and operational role:
 - **GraphCast** (Google DeepMind, 2023) — the original research architecture
-- **[GraphCastGFS](./graphcastgfs.md)** (NCEP, experimental) — predecessor of AIGFS
+- **GraphCastGFS** (NCEP, experimental) — predecessor of AIGFS
 - **[GEML](../canada/gdps-geml.md)** (ECCC, experimental) — Canadian productionization, fine-tuned on ERA5 + ECMWF HRES analyses; also serves as the spectral nudging target for ECCC's operational hybrid [GDPS](../canada/gem-global.md) (since v10.0.0, May 26, 2026)
 - **AIGFS** (NOAA, operational; this entry)
 
 ### Architectural peers (different lineages)
 - **[AIFS Single](../eu/aifs-single.md)** (ECMWF, operational) — encoder-processor-decoder architecture with attention-based GNN encoder/decoder and sliding-window transformer processor; trained with the Anemoi framework
-- **[FourCastNetGFS](./fourcastnetgfs.md)** (NCEP, experimental) — productionization of NVIDIA's FourCastNet using Spherical Fourier Neural Operators
+- **FourCastNetGFS** (NCEP, experimental) — productionization of NVIDIA's FourCastNet using Spherical Fourier Neural Operators
 
 ### Companion physics-based system
 - **[GFS](./gfs.md)** (NOAA, operational) — the physics-based global model that AIGFS complements. AIGFS is initialized from the same GDAS analyses and runs at the same 4× daily cadence; the two systems are intended to be used together rather than as substitutes.
@@ -145,7 +145,7 @@ GraphCast-style models like AIGFS require **two consecutive analysis times** (T 
 ## Notes
 - AIGFS is a **stripped-down dataset compared to GFS**. Users running WRF or other downstream models that depend on AIGFS for boundary conditions have reported that the limited variable set is insufficient on its own and have had to merge AIGFS data with GFS to fill gaps. Users planning to swap AIGFS in as a drop-in replacement for GFS in existing pipelines should verify their required variables are actually produced.
 - The `forecast_13_levels` naming convention used in NOAA's AIGFS distribution reflects the GraphCast operational configuration (13 pressure levels), distinguishing it from earlier 37-level GraphCast experiments that NOAA decommissioned for storage and accuracy reasons.
-- The pressure-level structure (1000 to 50 hPa, 13 levels) is the GraphCast-canonical set and is identical to the levels used by [GraphCastGFS](./graphcastgfs.md), ECCC's [GEML](../canada/gdps-geml.md), and AIFS Single v1. ECMWF's AIFS Single v2 (May 2026) extended this to 14 levels by adding 10 hPa for stratospheric coverage. AIGFS v1.0 retains the 13-level configuration; whether future AIGFS versions follow AIFS into the stratosphere has not been publicly stated.
+- The pressure-level structure (1000 to 50 hPa, 13 levels) is the GraphCast-canonical set and is identical to the levels used by GraphCastGFS, ECCC's [GEML](../canada/gdps-geml.md), and AIFS Single v1. ECMWF's AIFS Single v2 (May 2026) extended this to 14 levels by adding 10 hPa for stratospheric coverage. AIGFS v1.0 retains the 13-level configuration; whether future AIGFS versions follow AIFS into the stratosphere has not been publicly stated.
 - **Ongoing AIGFS development continues experimentally** in the EAGLE SOLO AWS bucket, versioned as `AIGFSdev{X.Y}`. The first such experiment, **AIGFSdev2.1** (started 19 December 2025), updated GraphCast's loss function from grid-point mean squared error to a **spectral harmonic-based mean squared error** designed to mitigate the "double penalty" problem common to MSE-trained data-driven forecasts (cf. arXiv:2501.19374). The dev forecasts are not operational AIGFS — they are research iterations being evaluated for incorporation into a future operational AIGFS upgrade.
 - Due to the non-determinism of GPU computation, users running AIGFS or its underlying GraphCast weights themselves cannot exactly reproduce NOAA's official forecasts.
 - AIGFS (along with AIGEFS and HGEFS) is part of the broader **Project EAGLE**, a joint effort between NOAA Research Laboratories, EPIC (within OAR), and the National Weather Service. EAGLE continues to develop AI-based regional, sub-seasonal, and seasonal forecast systems beyond the operational AIGFS / AIGEFS / HGEFS deterministic and ensemble suite.
