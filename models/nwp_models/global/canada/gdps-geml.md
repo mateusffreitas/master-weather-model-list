@@ -90,7 +90,7 @@ This dual role distinguishes GEML from other operational AI models like AIGFS or
 ### Architectural lineage
 GEML is part of a broader family of operational productionizations of the GraphCast architecture:
 - **GraphCast** (Google DeepMind, 2023) — the original research architecture, pre-trained on ERA5
-- **[GraphCastGFS](./graphcastgfs.md)** (NOAA, experimental) — NCEP's productionization, fine-tuned on GDAS+ERA5
+- **GraphCastGFS** (NOAA, experimental) — NCEP's productionization, fine-tuned on GDAS+ERA5
 - **[AIGFS](./aigfs.md)** (NOAA, operational) — operational descendant of GraphCastGFS, replaced EAGLE SOLO in December 2025
 - **GEML** (ECCC, this entry) — Canadian productionization, fine-tuned on ERA5 + ECMWF HRES analyses
 
@@ -98,7 +98,7 @@ The four systems share the same underlying GNN architecture and 13-pressure-leve
 
 ### Architectural peers (different lineages)
 - **[AIFS Single](../eu/aifs-single.md)** (ECMWF) — operational AI deterministic, encoder-processor-decoder architecture with attention-based GNN encoder/decoder and sliding-window transformer processor
-- **[FourCastNetGFS](./fourcastnetgfs.md)** (NOAA, experimental) — NCEP's productionization of NVIDIA's FourCastNet using Spherical Fourier Neural Operators
+- **FourCastNetGFS** (NOAA, experimental) — NCEP's productionization of NVIDIA's FourCastNet using Spherical Fourier Neural Operators
 
 ### Companion ECCC systems
 - **[Operational GDPS](./gem-global.md):** ECCC's stable physics-based global model. Provides the analysis used to initialize GEML.
