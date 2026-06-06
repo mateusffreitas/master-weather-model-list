@@ -91,10 +91,10 @@ Experimental coupled atmosphere-ocean-sea ice prediction system at ~3 km resolut
 ### [HRDPS-West (ECCC)](./models/nwp_models/regional/canada/hrdps-west.md)
 Experimental kilometric-scale (~1 km) deterministic NWP system covering Southern British Columbia. GEM v5.2.0 atmospheric model piloted by HRDPS national v7.0.0, with surface initial conditions from CaLDAS. Distributed via the MSC alpha datamart (separate from the standard operational MSC datamart). Intended to better resolve mesoscale features in BC's complex topography than the operational 2.5 km HRDPS. Current version 1.5.0 released November 6, 2024.
 
-### [GraphCastGFS (NOAA)](./models/nwp_models/global/usa/graphcastgfs.md)
+### GraphCastGFS (NOAA)
 Experimental productionization of Google DeepMind's GraphCast architecture by NOAA, fine-tuned on GDAS+ERA5 data. Predecessor of the operational AIGFS, but continues to run experimentally alongside its operational descendant.
 
-### [FourCastNetGFS (NOAA)](./models/nwp_models/global/usa/fourcastnetgfs.md)
+### FourCastNetGFS (NOAA)
 Experimental productionization of NVIDIA's FourCastNet architecture using Spherical Fourier Neural Operators. No operational descendant announced as of April 2026.
 
 ---
