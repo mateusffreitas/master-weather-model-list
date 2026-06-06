@@ -99,13 +99,13 @@ These approaches reflect genuinely different theories about how AI should enter 
 
 The following systems are productionizations of research AI architectures that are run experimentally by NWP centres but have not (or have not yet) become operational forecast products.
 
-### [GraphCastGFS (NOAA)](./models/nwp_models/global/usa/graphcastgfs.md)
+### GraphCastGFS (NOAA)
 - **Operator:** NOAA / NCEP
 - **Status:** Experimental
 - **Approach:** Productionization of Google DeepMind's GraphCast architecture, fine-tuned on GDAS+ERA5 data
 - **Lineage:** Predecessor to the operational AIGFS
 
-### [FourCastNetGFS (NOAA)](./models/nwp_models/global/usa/fourcastnetgfs.md)
+### FourCastNetGFS (NOAA)
 - **Operator:** NOAA / NCEP
 - **Status:** Experimental
 - **Approach:** Productionization of NVIDIA's FourCastNet architecture using Spherical Fourier Neural Operators
@@ -129,13 +129,13 @@ Most operational AI weather models trace back to a small number of research arch
 ### GraphCast lineage (Google DeepMind, 2023)
 The GraphCast research architecture has been productionized by both NOAA and ECCC, with each centre fine-tuning it on different reanalysis and analysis data:
 
-- **GraphCast** (research) → **[GraphCastGFS](./models/nwp_models/global/usa/graphcastgfs.md)** (NOAA experimental) → **[AIGFS](./models/nwp_models/global/usa/aigfs.md)** (NOAA operational)
+- **GraphCast** (research) → **GraphCastGFS** (NOAA experimental) → **[AIGFS](./models/nwp_models/global/usa/aigfs.md)** (NOAA operational)
 - **GraphCast** (research) → **[GEML](./models/nwp_models/global/canada/gdps-geml.md)** (ECCC experimental)
 
 The two operational lineages share architecture and a 13-pressure-level vertical structure but differ in training data, fine-tuning procedures, and operational status.
 
 ### FourCastNet lineage (NVIDIA, 2022)
-- **FourCastNet** (research) → **[FourCastNetGFS](./models/nwp_models/global/usa/fourcastnetgfs.md)** (NOAA experimental, no operational descendant announced)
+- **FourCastNet** (research) → **FourCastNetGFS** (NOAA experimental, no operational descendant announced)
 
 ### ECMWF in-house architecture
 - **[AIFS Single](./models/nwp_models/global/eu/aifs-single.md)** and **[AIFS ENS](./models/ensemble_models/global/eu/aifs-ens.md)** use ECMWF's own encoder–processor–decoder architecture with attention-based GNN encoder/decoder and sliding-window transformer processor. Not derived from GraphCast or FourCastNet.
