@@ -48,7 +48,7 @@ Deterministic forecasts of:
 - Wind gusts, downward shortwave radiation, mean sea level pressure, and additional surface diagnostics
 - A wide set of upper-air pressure levels suitable for synoptic and aviation use
 
-ARPEGE serves as the primary lateral boundary condition source for the various AROME regional configurations (AROME France, AROME France HD, and the AROME Outre-Mer suite covering Antilles, French Guiana, New Caledonia, Polynesia, and Réunion–Mayotte).
+ARPEGE serves as a primary initial- and boundary-condition source for the AROME regional configurations: [AROME France](../../regional/france/arome-france.md), AROME France HD, and [AROME Outre-Mer](../../regional/france/arome-outre-mer.md) (which spans five overseas domains — Antilles, French Guiana, New Caledonia, French Polynesia, and Réunion–Mayotte).
 
 ---
 
