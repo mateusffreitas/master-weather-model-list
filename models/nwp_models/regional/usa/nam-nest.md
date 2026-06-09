@@ -99,7 +99,7 @@ Unlike [HRRR](./hrrr.md), the NAM Nest covers Hawaii and Puerto Rico operational
 ## Relationship to other models
 - **[NAM](./nam.md):** Parent model. The NAM Nest is one part of a single integrated NAM production execution that produces both the 12 km parent and all five nests in one run.
 - **[HRRR](./hrrr.md):** Operational counterpart for CONUS and Alaska convection-allowing guidance. HRRR is hourly-updating and uses different DA (HRRRDAS), while the NAM Nest is 4× daily and shares NDAS DA with the parent NAM. The two systems are complementary: HRRR's hourly updates are useful for short-range forecasting while the NAM Nest provides convection-allowing guidance for Hawaii and Puerto Rico that HRRR doesn't operationally cover.
-- **[HiresW Guam](./hiresw-guam.md):** Operational convection-allowing guidance for Guam (after the broader HiresW retirement); not produced by the NAM Nest.
+- **[HiresW](./hiresw.md):** Operational convection-allowing guidance for Guam (after the broader HiresW retirement); not produced by the NAM Nest.
 - **[HREF](./href.md):** Multi-model regional ensemble that uses some NAM Nest output as members.
 - **[NBM](./nbm.md):** Uses NAM Nest fields as one of many deterministic inputs.
 - **[RRFS](./rrfs.md):** Replacement. RRFSv1 implements August 31, 2026 at 12 UTC under SCN 26-48; it covers CONUS at 3 km, Alaska at 3 km, Hawaii at 2.5 km, and Puerto Rico at 2.5 km, providing functionally equivalent convection-allowing guidance to all NAM Nest domains. The 1.5 km fire-weather nest is replaced by a separate relocatable 1.5 km RRFS fire-weather run on a 5° × 5° rotated lat-lon domain. Many NAM Nest output grids will continue to be produced from RRFS output via post-processing.
