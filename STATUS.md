@@ -63,7 +63,7 @@ These systems are scheduled for retirement on **August 31, 2026 at 12 UTC**, the
 - [NAM](./models/nwp_models/regional/usa/nam.md) — full retirement (12 km parent and all 3 km nests)
 - [NAM Nest](./models/nwp_models/regional/usa/nam-nest.md) — all convection-allowing nests
 - [HREF](./models/ensemble_models/regional/usa/href.md) — replaced by REFS (extends 48 h → 60 h)
-- HiresW — CONUS, Alaska, Hawaii, and Puerto Rico domains; see [HiresW Guam](./models/nwp_models/regional/usa/hiresw-guam.md) for the surviving Guam exception
+- [HiresW](./models/nwp_models/regional/usa/hiresw.md) — CONUS, Alaska, Hawaii, and Puerto Rico domains; see [Status and retirement](./models/nwp_models/regional/usa/hiresw.md#status-and-retirement) for the surviving Guam exception
 - SREF (not in repo) — replaced by REFS; the SCN-confirmed retirement supersedes the earlier expectation that SREF would persist into the second wave under RRFSv2
 - NARRE (not in repo) — replaced by REFS
 - NAM MOS (not in repo) — retired alongside NAM
