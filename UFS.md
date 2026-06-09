@@ -74,7 +74,7 @@ These are the most operationally significant UFS transitions that are either imm
   - [NAM](./models/nwp_models/regional/usa/nam.md) (12 km parent and all 3 km nests including fire weather)
   - [NAM Nest](./models/nwp_models/regional/usa/nam-nest.md)
   - [HREF](./models/ensemble_models/regional/usa/href.md) (replaced by REFS)
-  - HiresW (CONUS, Alaska, Hawaii, Puerto Rico domains — see [HiresW Guam](./models/nwp_models/regional/usa/hiresw-guam.md) for the surviving exception)
+  - [HiresW](./models/nwp_models/regional/usa/hiresw.md) (CONUS, Alaska, Hawaii, Puerto Rico domains — see [Status and retirement](./models/nwp_models/regional/usa/hiresw.md#status-and-retirement) for the surviving exception)
   - SREF (not in this repository) — replaced by REFS
   - NARRE (not in this repository) — replaced by REFS
   - NAM MOS (not in this repository) — retired alongside NAM
@@ -118,7 +118,7 @@ These systems are scheduled for retirement on **August 31, 2026 at 12 UTC**, on 
 | [NAM](./models/nwp_models/regional/usa/nam.md) | RRFSv1 (CONUS 3 km, post-processed grids) | Full retirement: 12 km parent, all 3 km nests, fire-weather nest |
 | [NAM Nest](./models/nwp_models/regional/usa/nam-nest.md) | RRFSv1 | All convection-allowing nests retired |
 | [HREF](./models/ensemble_models/regional/usa/href.md) | [REFS](./models/ensemble_models/regional/usa/refs.md) | Full replacement; REFS extends to 60 h, runs 4× daily for all regions |
-| HiresW CONUS, AK, HI, PR | RRFSv1 (3 km CONUS/AK; 2.5 km HI/PR) | Guam domain explicitly preserved — see [HiresW Guam](./models/nwp_models/regional/usa/hiresw-guam.md) |
+| [HiresW](./models/nwp_models/regional/usa/hiresw.md) CONUS, AK, HI, PR | RRFSv1 (3 km CONUS/AK; 2.5 km HI/PR) | Guam domain explicitly preserved — see [Status and retirement](./models/nwp_models/regional/usa/hiresw.md#status-and-retirement) |
 | SREF (not in repo) | REFS | SCN-confirmed first-wave retirement; previously expected to persist into the second wave under RRFSv2 |
 | NARRE (not in repo) | REFS | NARRE's hourly 12-h ensemble guidance replaced by REFS's 60-h forecasts |
 | NAM MOS (not in repo) | Post-processed RRFS-based statistical guidance | Retired alongside NAM |
