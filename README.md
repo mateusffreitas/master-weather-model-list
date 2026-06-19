@@ -23,6 +23,7 @@ No meteorology background is required to use this repository.
 - **Ocean physics models** (temperature, salinity, currents, sea level, sea ice — distinct from wave models)
 - **Tropical cyclone / hurricane models**
 - **Air quality and atmospheric composition models**
+- **Long-range forecast systems** (sub-seasonal, seasonal, and interannual prediction)
 - **AI-based and hybrid physics–AI forecast systems**
 - **Operational weather satellites** with openly distributed raw data (Level 1 calibrated radiances, Level 2 retrievals)
 - **Free and publicly downloadable data**, including:
@@ -40,7 +41,7 @@ No meteorology background is required to use this repository.
 - Data that requires approval gates, vetted-user programs, or commercial-use restrictions beyond simple registration
 - Models that only provide maps or viewers without downloadable data (this excludes the many nowcasting products distributed only as web radar loops or viewer animations)
 - Research-only or one-off model runs that are not distributed by an operating agency
-- Climate reanalysis or historical-only datasets
+- Climate **reanalysis** and other historical-only datasets (e.g., ERA5, CFSR) — note that forward-looking long-range *forecast* systems (sub-seasonal, seasonal, and interannual prediction) **are** in scope and are documented under `models/climate_models/`; only reanalyses and historical-only products are excluded
 - Commercial weather satellites and Earth observation missions outside the operational weather/atmospheric scope
 
 A note on free registration: some operators (notably EUMETSAT and KNMI) require a free account to download data. These are not paywalls — there is no fee, no approval gate, and no commercial-use restriction. Entries clearly note when registration is required so users know what to expect.
@@ -52,7 +53,7 @@ A note on experimental systems: some entries document systems their operators ex
 ## Repository structure
 
 Forecast models are organized by:
-- **Model type** (weather, ensemble, nowcasting, wave, ocean, tropical cyclone, air quality)
+- **Model type** (weather, ensemble, nowcasting, wave, ocean, tropical cyclone, air quality, long-range)
 - **Geographic scope** (global vs regional)
 - **Country or organization of origin**
 
