@@ -24,15 +24,15 @@ HungaroMet runs three closely related operational systems on the same infrastruc
 ## Basic details
 - **Model type:** Regional deterministic NWP (convection-permitting)
 - **Model system / core:** AROME (ALADIN-NH dynamical core, with Meso-NH–derived physics)
-- **Code version:** cy43t2_bf11 (operational status as of the 2024 LACE status report; CY46T1 verified during 2024 with operational implementation planned for February 2025 — see *Recent version history*)
+- **Code version:** cy46t1_bf07 (operational since the end of February 2025, per HungaroMet's 2025 ACCORD/RC LACE poster; replaced cy43t2_bf11 — see *Recent version history*)
 - **Dynamical formulation:** Non-hydrostatic, spectral, with semi-Lagrangian advection and semi-implicit time integration
 - **Convection-allowing:** Yes (deep convection explicitly resolved at 2.5 km; only shallow convection parameterized)
 - **Horizontal resolution:** ~2.5 km, distributed on a 0.025° × 0.025° regular latitude–longitude grid
-- **Vertical levels:** 60 (per HungaroMet's 2024 LACE status report and the HungaroMet modelling activities page; the open-data PDF lists 59, an apparent inconsistency in HungaroMet documentation)
+- **Vertical levels:** 60 (per HungaroMet's 2024 LACE status report, the 2025 ACCORD/RC LACE poster, and the HungaroMet modelling activities page; the open-data PDF lists 59, an apparent inconsistency in HungaroMet documentation)
 - **Model top:** ~2.7 hPa (~23 km)
 - **Time step:** 60 s
 - **Forecast length:** Up to 48 hours (publicly distributed product); HungaroMet's full operational suite produces 48 h or 36 h depending on cycle
-- **Update frequency:** 4× daily on the open data portal; HungaroMet's internal operational AROME runs **8× daily**
+- **Update frequency:** **4× daily on the open data portal (00/06/12/18 UTC)**; HungaroMet's internal operational AROME runs **8× daily** (00/06/12/18 UTC out to 48 h plus 03/09/15/21 UTC out to 36 h)
 - **Temporal output resolution:** 1 hour
 - **Workflow environment:** ECFLOW
 
@@ -40,16 +40,19 @@ HungaroMet runs three closely related operational systems on the same infrastruc
 
 ## Data assimilation
 - **Data assimilation:** Yes — AROME runs its own native high-resolution analysis (operational at HungaroMet since March 2013)
-- **Atmospheric analysis:** **3D-Var** with a static AROME-EDA-based B-matrix; no digital filter initialization
+- **Atmospheric analysis:** **3D-Var** with a static AROME-EDA-based B-matrix
 - **Surface analysis:** **SEKF** (Simplified Extended Kalman Filter)
 - **Cycle:** 3-hour assimilation cycle
-- **Observations assimilated (as of 2024):** SYNOP, AMDAR, TEMP (radiosondes), GNSS-ZTD, Slovenian and Czech Mode-S MRAR (aircraft-derived), AMV (atmospheric motion vectors), and HRWind. Observations are sourced via the **OPLACE** RC LACE pre-processing service.
+- **Initialization:** Space-consistent coupling; **no digital filter initialization (DFI)**
+- **Cycled fields:** Hydrometeors and snow are cycled within the assimilation; lake temperature is initialized from in-situ measurements at **Lake Balaton** (per the 2025 ACCORD/RC LACE poster)
+- **Observations assimilated (as of 2025):** SYNOP (u, v, T, RH, z), TEMP (u, v, T, q), AMDAR (u, v, T, q), Slovenian and Czech Mode-S MRAR (u, v, T), GNSS-ZTD (IWV), and AMV / HRWind (u, v). Observations are sourced via the **OPLACE** RC LACE pre-processing service.
 
 ---
 
 ## Initial and boundary conditions
 - **Initial conditions:** AROME 3D-Var + SEKF analysis (atmosphere + surface)
-- **Lateral boundary conditions:** **ECMWF HRES** (IFS), 1-hourly coupling frequency
+- **Lateral boundary conditions:** **ECMWF HRES** (IFS), 1-hourly coupling frequency, delivered via the Internet
+  - **Backup LBCs:** Météo-France **ARPEGE** (per the 2025 ACCORD/RC LACE poster)
   - Time-lagged coupling for the production forecast
   - Mixed coupling in the data assimilation cycle
 
@@ -92,10 +95,11 @@ Deterministic forecasts of a wide range of atmospheric fields, distributed as on
 ---
 
 ## Notes
-- **Public subset vs full operational suite:** HungaroMet runs AROME 8× daily out to 48 h / 36 h depending on cycle. The open data portal distributes 4 of these cycles out to +48 h. Users requiring more frequent cycles, the longer cycles, or other internal products should contact HungaroMet directly.
-- **Sibling: ALARO (8 km, deterministic, not publicly distributed):** HungaroMet's synoptic-scale model is **ALARO** at 8 km / L49, hydrostatic, with parameterized deep convection — covering most of continental Europe. As of the 2024 LACE status report it runs cy40t1_bf05, 4× daily out to 60/48/60/36 h, coupled to ECMWF HRES at 3-hour frequency, with 3D-Var + CANARI assimilation on a 6-hour cycle (SYNOP, AMDAR, TEMP, SEVIRI, Geowind AMV, NOAA-18 AMSU-A, MHS) and digital filter initialization. ALARO is not currently published on ODP. (Older HungaroMet documentation refers to this system as "ALADIN," reflecting the ALADIN/ALARO physics history; HungaroMet's current internal designation is ALARO.)
-- **Sibling: AROME-EPS (operational, not publicly distributed):** HungaroMet operates a regional ensemble using the same AROME core: **11 members**, 2.5 km / L60, cy43t2_bf11, 2 runs/day (00 and 12 UTC) out to 48 h, EDA-based initial conditions (3D-Var + SEKF on a 3-hour DA cycle, same observation set as deterministic AROME), coupled to **ECMWF ENS** (first 10 perturbed members + control). Stochastically Perturbed Parametrizations (SPP) are under development with operational introduction targeted for Q2–Q3 2025. AROME-EPS is not currently published on ODP; should it become available, it would belong under regional ensemble models.
-- **Sibling: AROME-RUC (e-suite, experimental):** HungaroMet is developing **AROME-RUC**, a 1.3 km / L90 / cy43t2_bf11 rapid-update configuration on approximately the same domain as operational AROME, with a 1-hour DA cycle (30-minute cut-off) and 8 runs/day out to 12 h (extended on 27 August 2024 to 30 h at 00 UTC and 24 h at 06 UTC). Same observation set as AROME-OPER, including GNSS-ZTD with an expanded whitelist. This system is analogous to the AROME-RUC configuration at GeoSphere Austria.
+- **Public subset vs full operational suite:** HungaroMet runs AROME **8× daily** — the four main synoptic cycles (00/06/12/18 UTC) out to 48 h plus four intermediate cycles (03/09/15/21 UTC) out to 36 h. The open data portal distributes **only the four main 00/06/12/18 UTC cycles, out to +48 h, at hourly output resolution**. Internally HungaroMet also generates **15-minute outputs** for commercial users and the hail-prevention system; these higher-frequency products are not published on ODP. Users requiring more frequent cycles, the longer cycles, the 15-minute fields, or other internal products should contact HungaroMet directly.
+- **Screen-level diagnostics:** Screen-level (2 m / 10 m) variables are diagnosed using a surface boundary-layer (SBL) scheme over both nature and sea tiles (per the 2025 ACCORD/RC LACE poster).
+- **Sibling: ALADIN/HU — "ALARO" (8 km, deterministic, not publicly distributed):** HungaroMet's synoptic-scale model is an 8 km / L49 ALARO-physics model, hydrostatic, with parameterized deep convection — covering most of continental Europe. The 2025 ACCORD/RC LACE poster labels it **cy40t1 (ALARO-v1b physics)** and uses the system name **ALADIN/HU**; the 2024 LACE report gave the branch as cy40t1_bf05. It runs **4× daily (00/06/12/18 UTC) out to 60/48/60/36 h**, coupled to ECMWF HRES at 3-hour frequency, with 3D-Var (upper air) + optimal interpolation (surface) on a **6-hour cycle**, downscaled ensemble background-error covariances, and digital filter initialization. Assimilated observations (2025): SYNOP, SYNOP-SHIP, TEMP, AMDAR, ATOVS (AMSU, MHS radiances), MSG/GEOWIND AMV, and MSG/SEVIRI radiances. ALADIN/HU is not published on ODP. (HungaroMet documentation uses "ALADIN/HU" and "ALARO" interchangeably, reflecting the ALADIN dynamical core with ALARO physics.)
+- **Sibling: AROME-EPS (operational, not publicly distributed):** HungaroMet operates a regional ensemble using the same AROME core: **11 members**, 2.5 km / L60, 2 forecast runs/day (00 and 12 UTC) out to 48 h, with local perturbations from a **3-hourly ensemble data assimilation** (same observation set as deterministic AROME), coupled to **ECMWF ENS** with hourly LBCs from the **18/06 UTC ENS** runs. The 2025 ACCORD/RC LACE poster states the resolution and physics are "as in AROME/HU" but gives no explicit cycle label for the ensemble; the 2024 LACE report listed cy43t2_bf11. Whether AROME-EPS now tracks the deterministic upgrade to cy46t1_bf07 is **not explicitly confirmed** in the poster. Stochastically Perturbed Parametrizations (SPP) were under development with operational introduction targeted for Q2–Q3 2025. AROME-EPS is not currently published on ODP; should it become available, it would belong under regional ensemble models.
+- **Sibling: AROME-RUC (e-suite, experimental):** HungaroMet is developing **AROME-RUC**, a 1.3 km / L90 / cy43t2_bf11 rapid-update configuration on approximately the same domain as operational AROME, with a 1-hour DA cycle (30-minute cut-off) and 8 runs/day out to 12 h (extended on 27 August 2024 to 30 h at 00 UTC and 24 h at 06 UTC). Same observation set as AROME-OPER, including GNSS-ZTD with an expanded whitelist. The 2025 ACCORD/RC LACE poster reports testing of **EMADDC Mode-S EHS (Enhanced Surveillance) wind/temperature assimilation** in AROME-RUC (June 2024 experiments), with early signals in high-level winds and precipitation but no clear operational benefit yet. This system is analogous to the AROME-RUC configuration at GeoSphere Austria.
 - **Relationship to siblings in the AROME / HARMONIE-AROME family:** AROME Hungary shares the same dynamical core and physics packages as other ACCORD-consortium AROME / HARMONIE-AROME deployments. See [AROME France](../france/arome-france.md), [AROME Austria](../austria/arome-austria.md), [AROME-Arctic](../norway/arome-arctic.md), [HARMONIE-AROME Ireland](../ireland/harmonie-arome-ireland.md), and [MEPS](../norway/meps.md) for closely related systems. Other ALADIN/ALARO Central European deployments include [ALADIN Slovakia](../slovakia/aladin-slovakia.md), [ALADIN-HR (Croatia)](../croatia/aladin-hr.md), and [ALARO Belgium](../belgium/alaro-belgium.md).
 - **RC LACE / OPLACE:** HungaroMet leads the **OPLACE** observation pre-processing service for the RC LACE cooperation, providing pre-processed observation streams (in OPLACE obsoul format) for data assimilation across partner services.
 
@@ -103,10 +107,10 @@ Deterministic forecasts of a wide range of atmospheric fields, distributed as on
 
 ## Recent version history
 
-> **Note on currency:** The most recent authoritative HungaroMet status documentation available is the 2024 RC LACE annual status presentation. Operational state in 2025–2026 may differ; the bullets below are dated where possible.
+> **Note on currency:** The most recent authoritative HungaroMet status documentation on file is the **2025 ACCORD/RC LACE poster** ("NWP activities at the Hungarian Meteorological Service," Szépszó et al., 2025). No 2026 status document has been located yet. Operational state in 2026 may differ; the bullets below are dated where possible.
 
-### Planned for February 2025 — Operational implementation of CY46T1
-The 2024 LACE status report confirms that CY46T1 verification was completed during 2024 (winter period 06 January – 11 February 2024, summer period June 2024) and showed only minor differences from cy43t2 in 2 m temperature scores and precipitation case studies. CY46T1 was scheduled for operational implementation in **February 2025**. The operational status as of mid-2026 is not confirmed in the documentation we have on file.
+### End of February 2025 — CY46T1 (cy46t1_bf07) operational
+The 2025 ACCORD/RC LACE poster confirms **cy46t1_bf07 became operational in AROME/HU at the end of February 2025**, alongside the operational introduction of a reduced ECOCLIMAP-II town-fraction PGD modification (FTOWN_MIN threshold) addressing summer warm biases in 2 m temperature. This realized the upgrade the 2024 LACE report had scheduled for February 2025 (CY46T1 verification during 2024 had shown only minor differences from cy43t2 in 2 m temperature scores and precipitation case studies).
 
 ### 16 January 2024 — GNSS-ZTD assimilation in fine-resolution AROME (e-suite)
 GNSS Zenith Total Delay assimilation was activated in the fine-resolution AROME e-suite (AROME-RUC, 1.3 km) using the same whitelist as operational AROME, following a bug-fix in the PREGPSSOL preprocessor (1-hourly cycling). Improvements in 2 m relative humidity scores were demonstrated against the operational AROME 2.5 km baseline.
@@ -137,6 +141,7 @@ HungaroMet's native AROME 3D-Var atmospheric assimilation became operational, in
 - RC LACE Central European cooperation: http://www.rclace.eu/
 
 ### Key references
+- Szépszó, G., Elek, P., Jávorné Radnóczi, K., Lancz, D., Tóth, B., Tóth, H. (2025). *NWP activities at the Hungarian Meteorological Service.* ACCORD / RC LACE poster.
 - Duics-Korosecz, L., Elek, P., Homonnai, V., Lancz, D., Nagy, G., Jávorné Radnóczi, K., Tóth, H. (2024). *NWP developments in Hungary in 2024.* RC LACE annual status presentation (online DA Working Days).
 - Szintai, B., Szűcs, M., Randriamampianina, R., Kullmann, L. (2015). *Application of the AROME non-hydrostatic model at the Hungarian Meteorological Service: physical parametrizations and ensemble forecasting.* Időjárás, **119**, 241–265.
 
